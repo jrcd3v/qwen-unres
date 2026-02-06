@@ -209,4 +209,4 @@ To report a bug from within the CLI, run `/bug` and include a short title and re
 
 ## Acknowledgments
 
-This project is based on [Google Gemini CLI](https://github.com/google-gemini/gemini-cli) and [QwenLM qwen-code]. We acknowledge and appreciate the excellent work of the Gemini CLI team. Our main contribution focuses on parser-level adaptations to better support Qwen-Coder models.
+This project is based on [Google Gemini CLI](https://github.com/google-gemini/gemini-cli) and [QwenLM qwen-code](https://github.com/QwenLM/qwen-code). We acknowledge and appreciate the excellent work of the Gemini CLI and Qwen team. 
