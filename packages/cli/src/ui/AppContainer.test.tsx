@@ -20,7 +20,7 @@ import {
   makeFakeConfig,
   type GeminiClient,
   type SubagentManager,
-} from '@qwen-code/qwen-code-core';
+} from '@jrcdev/boros-code-core';
 import type { LoadedSettings } from '../config/settings.js';
 import type { InitializationResult } from '../core/initializer.js';
 import { UIStateContext, type UIState } from './contexts/UIStateContext.js';
@@ -110,7 +110,7 @@ import { useLogger } from './hooks/useLogger.js';
 import { useLoadingIndicator } from './hooks/useLoadingIndicator.js';
 import { measureElement } from 'ink';
 import { useTerminalSize } from './hooks/useTerminalSize.js';
-import { ShellExecutionService } from '@qwen-code/qwen-code-core';
+import { ShellExecutionService } from '@jrcdev/boros-code-core';
 
 describe('AppContainer State Management', () => {
   let mockConfig: Config;

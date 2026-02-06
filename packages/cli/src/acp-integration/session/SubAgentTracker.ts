@@ -14,11 +14,11 @@ import type {
   ToolCallConfirmationDetails,
   AnyDeclarativeTool,
   AnyToolInvocation,
-} from '@qwen-code/qwen-code-core';
+} from '@jrcdev/boros-code-core';
 import {
   SubAgentEventType,
   ToolConfirmationOutcome,
-} from '@qwen-code/qwen-code-core';
+} from '@jrcdev/boros-code-core';
 import { z } from 'zod';
 import type { SessionContext } from './types.js';
 import { ToolCallEmitter } from './emitters/ToolCallEmitter.js';

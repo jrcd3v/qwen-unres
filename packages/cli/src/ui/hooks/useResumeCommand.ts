@@ -5,7 +5,7 @@
  */
 
 import { useState, useCallback } from 'react';
-import { SessionService, type Config } from '@qwen-code/qwen-code-core';
+import { SessionService, type Config } from '@jrcdev/boros-code-core';
 import { buildResumedHistoryItems } from '../utils/resumeHistoryUtils.js';
 import type { UseHistoryManagerReturn } from './useHistoryManager.js';
 

@@ -5,7 +5,7 @@
  */
 
 import { describe, expect, it, vi } from 'vitest';
-import type { FileSystemService } from '@qwen-code/qwen-code-core';
+import type { FileSystemService } from '@jrcdev/boros-code-core';
 import { AcpFileSystemService } from './filesystem.js';
 import { ACP_ERROR_CODES } from '../errorCodes.js';
 

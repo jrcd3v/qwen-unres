@@ -10,8 +10,8 @@ import path from 'node:path';
 import toml from '@iarna/toml';
 import { glob } from 'glob';
 import { z } from 'zod';
-import type { Config } from '@qwen-code/qwen-code-core';
-import { EXTENSIONS_CONFIG_FILENAME, Storage } from '@qwen-code/qwen-code-core';
+import type { Config } from '@jrcdev/boros-code-core';
+import { EXTENSIONS_CONFIG_FILENAME, Storage } from '@jrcdev/boros-code-core';
 import type { ICommandLoader } from './types.js';
 import {
   parseMarkdownCommand,

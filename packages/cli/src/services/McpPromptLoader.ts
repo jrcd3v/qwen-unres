@@ -4,11 +4,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import type { Config } from '@qwen-code/qwen-code-core';
-import {
-  getErrorMessage,
-  getMCPServerPrompts,
-} from '@qwen-code/qwen-code-core';
+import type { Config } from '@jrcdev/boros-code-core';
+import { getErrorMessage, getMCPServerPrompts } from '@jrcdev/boros-code-core';
 import type {
   CommandContext,
   SlashCommand,

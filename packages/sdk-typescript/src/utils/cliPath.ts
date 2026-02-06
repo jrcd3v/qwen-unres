@@ -69,7 +69,8 @@ function getCurrentModuleDir(): string {
 function findSdkPackageRoot(): string | null {
   try {
     const require = createRequire(import.meta.url);
-    const packageJsonPath = require.resolve('@qwen-code/sdk/package.json');
+    const packageJsonPath =
+      require.resolve('@jrcdev/boros-code-sdk/package.json');
     const packageRoot = path.dirname(packageJsonPath);
     const cliPath = path.join(packageRoot, 'dist', 'cli', 'cli.js');
     if (fs.existsSync(cliPath)) {
@@ -93,7 +94,7 @@ function findSdkPackageRoot(): string | null {
           const packageJson = JSON.parse(
             fs.readFileSync(packageJsonPath, 'utf-8'),
           );
-          if (packageJson.name === '@qwen-code/sdk') {
+          if (packageJson.name === '@jrcdev/boros-code-sdk') {
             return dir;
           }
           if (!bestMatch) {

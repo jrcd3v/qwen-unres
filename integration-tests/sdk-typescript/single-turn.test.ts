@@ -13,7 +13,7 @@ import {
   type SDKMessage,
   type SDKSystemMessage,
   type SDKAssistantMessage,
-} from '@qwen-code/sdk';
+} from '@jrcdev/boros-code/sdk';
 import {
   SDKTestHelper,
   extractText,

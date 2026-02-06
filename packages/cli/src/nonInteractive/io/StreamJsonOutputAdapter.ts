@@ -5,7 +5,7 @@
  */
 
 import { randomUUID } from 'node:crypto';
-import type { Config } from '@qwen-code/qwen-code-core';
+import type { Config } from '@jrcdev/boros-code-core';
 import type {
   CLIAssistantMessage,
   CLIMessage,

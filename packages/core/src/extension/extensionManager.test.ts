@@ -100,7 +100,7 @@ function createExtension({
   );
 
   if (addContextFile) {
-    fs.writeFileSync(path.join(extDir, 'QWEN.md'), 'context');
+    fs.writeFileSync(path.join(extDir, 'BOROS.md'), 'context');
   }
 
   if (contextFileName) {
@@ -192,7 +192,7 @@ describe('extension tests', () => {
       const ext1 = extensions.find((e) => e.config.name === 'ext1');
       const ext2 = extensions.find((e) => e.config.name === 'ext2');
       expect(ext1?.contextFiles).toEqual([
-        path.join(userExtensionsDir, 'ext1', 'QWEN.md'),
+        path.join(userExtensionsDir, 'ext1', 'BOROS.md'),
       ]);
       expect(ext2?.contextFiles).toEqual([]);
     });
@@ -228,7 +228,7 @@ describe('extension tests', () => {
           contextFileName: [],
         }),
       );
-      fs.writeFileSync(path.join(extDir, 'QWEN.md'), 'context content');
+      fs.writeFileSync(path.join(extDir, 'BOROS.md'), 'context content');
 
       const manager = createExtensionManager();
       await manager.refreshCache();
@@ -237,7 +237,7 @@ describe('extension tests', () => {
       expect(extensions).toHaveLength(1);
       const ext = extensions.find((e) => e.config.name === 'ext-empty-context');
       expect(ext?.contextFiles).toEqual([
-        path.join(userExtensionsDir, 'ext-empty-context', 'QWEN.md'),
+        path.join(userExtensionsDir, 'ext-empty-context', 'BOROS.md'),
       ]);
     });
 

@@ -9,16 +9,16 @@ import {
   AuthType,
   resolveModelConfig,
   type ProviderModelConfig,
-} from '@qwen-code/qwen-code-core';
+} from '@jrcdev/boros-code-core';
 import {
   getAuthTypeFromEnv,
   resolveCliGenerationConfig,
 } from './modelConfigUtils.js';
 import type { Settings } from '../config/settings.js';
 
-vi.mock('@qwen-code/qwen-code-core', async (importOriginal) => {
+vi.mock('@jrcdev/boros-code-core', async (importOriginal) => {
   const original =
-    await importOriginal<typeof import('@qwen-code/qwen-code-core')>();
+    await importOriginal<typeof import('@jrcdev/boros-code-core')>();
   return {
     ...original,
     resolveModelConfig: vi.fn(),

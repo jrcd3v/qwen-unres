@@ -10,13 +10,13 @@ import { act } from 'react';
 import { renderHook, waitFor } from '@testing-library/react';
 import { useGitBranchName } from './useGitBranchName.js';
 import { fs, vol } from 'memfs'; // For mocking fs
-import { isCommandAvailable, execCommand } from '@qwen-code/qwen-code-core';
+import { isCommandAvailable, execCommand } from '@jrcdev/boros-code-core';
 
-// Mock @qwen-code/qwen-code-core
-vi.mock('@qwen-code/qwen-code-core', async () => {
+// Mock @jrcdev/boros-code-core
+vi.mock('@jrcdev/boros-code-core', async () => {
   const original = await vi.importActual<
-    typeof import('@qwen-code/qwen-code-core')
-  >('@qwen-code/qwen-code-core');
+    typeof import('@jrcdev/boros-code-core')
+  >('@jrcdev/boros-code-core');
   return {
     ...original,
     execCommand: vi.fn(),

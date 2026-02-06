@@ -11,10 +11,10 @@ import { SessionPicker } from './SessionPicker.js';
 import type {
   SessionListItem,
   ListSessionsResult,
-} from '@qwen-code/qwen-code-core';
+} from '@jrcdev/boros-code-core';
 
-vi.mock('@qwen-code/qwen-code-core', async () => {
-  const actual = await vi.importActual('@qwen-code/qwen-code-core');
+vi.mock('@jrcdev/boros-code-core', async () => {
+  const actual = await vi.importActual('@jrcdev/boros-code-core');
   return {
     ...actual,
     getGitBranch: vi.fn().mockReturnValue('main'),

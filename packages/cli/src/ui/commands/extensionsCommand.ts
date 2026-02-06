@@ -17,7 +17,7 @@ import {
   ExtensionManager,
   parseInstallSource,
   type ExtensionUpdateInfo,
-} from '@qwen-code/qwen-code-core';
+} from '@jrcdev/boros-code-core';
 import { SettingScope } from '../../config/settings.js';
 import open from 'open';
 import { extensionToOutputString } from '../../commands/extensions/utils.js';

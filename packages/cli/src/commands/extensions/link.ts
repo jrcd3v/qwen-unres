@@ -5,7 +5,7 @@
  */
 
 import type { CommandModule } from 'yargs';
-import { type ExtensionInstallMetadata } from '@qwen-code/qwen-code-core';
+import { type ExtensionInstallMetadata } from '@jrcdev/boros-code-core';
 import { getErrorMessage } from '../../utils/errors.js';
 import {
   requestConsentNonInteractive,

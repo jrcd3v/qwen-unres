@@ -6,7 +6,7 @@
 
 import type React from 'react';
 import { useState } from 'react';
-import { AuthType } from '@qwen-code/qwen-code-core';
+import { AuthType } from '@jrcdev/boros-code-core';
 import { Box, Text } from 'ink';
 import { Colors } from '../colors.js';
 import { useKeypress } from '../hooks/useKeypress.js';

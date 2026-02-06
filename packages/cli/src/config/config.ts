@@ -30,7 +30,7 @@ import {
   WriteFileTool,
   NativeLspClient,
   NativeLspService,
-} from '@qwen-code/qwen-code-core';
+} from '@jrcdev/boros-code-core';
 import { extensionsCommand } from '../commands/extensions.js';
 import type { Settings } from './settings.js';
 import {

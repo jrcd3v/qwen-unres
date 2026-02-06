@@ -11,7 +11,7 @@ import {
   getScopedEnvContents,
   promptForSetting,
   updateSetting,
-} from '@qwen-code/qwen-code-core';
+} from '@jrcdev/boros-code-core';
 import { t } from '../../i18n/index.js';
 
 // --- SET COMMAND ---

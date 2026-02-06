@@ -19,7 +19,7 @@ import {
   type Config,
   type ConversationRecord,
   type DeviceAuthorizationData,
-} from '@qwen-code/qwen-code-core';
+} from '@jrcdev/boros-code-core';
 import type { ApprovalModeValue } from './schema.js';
 import * as acp from './acp.js';
 import { AcpFileSystemService } from './service/filesystem.js';

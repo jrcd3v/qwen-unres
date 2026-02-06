@@ -31,7 +31,7 @@ vi.mock('./utils.js', () => ({
   }),
 }));
 
-vi.mock('@qwen-code/qwen-code-core', () => ({
+vi.mock('@jrcdev/boros-code-core', () => ({
   checkForExtensionUpdate: mockCheckForExtensionUpdate,
 }));
 

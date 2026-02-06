@@ -17,7 +17,7 @@ import {
   isSDKAssistantMessage,
   isSDKSystemMessage,
   type SDKMessage,
-} from '@qwen-code/sdk';
+} from '@jrcdev/boros-code/sdk';
 import {
   SDKTestHelper,
   extractText,

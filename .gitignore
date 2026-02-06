@@ -12,7 +12,7 @@
 !.gemini/config.yaml
 !.gemini/commands/
 
-# Note: .qwen-clipboard/ is NOT in gitignore so Gemini can access pasted images
+# Note: .boros-clipboard/ is NOT in gitignore so Gemini can access pasted images
 
 # Dependency directory
 node_modules
@@ -50,8 +50,8 @@ packages/core/src/generated/
 .integration-tests/
 packages/vscode-ide-companion/*.vsix
 
-# Qwen Code Configs
-.qwen/
+# Boros Code Configs
+.boros/
 logs/
 # GHA credentials
 gha-creds-*.json

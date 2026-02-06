@@ -17,12 +17,12 @@ import type {
   SubAgentStreamTextEvent,
   ToolEditConfirmationDetails,
   ToolInfoConfirmationDetails,
-} from '@qwen-code/qwen-code-core';
+} from '@jrcdev/boros-code-core';
 import {
   SubAgentEventType,
   ToolConfirmationOutcome,
   TodoWriteTool,
-} from '@qwen-code/qwen-code-core';
+} from '@jrcdev/boros-code-core';
 import type * as acp from '../acp.js';
 import { EventEmitter } from 'node:events';
 

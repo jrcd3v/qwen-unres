@@ -8,7 +8,7 @@ import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { listMcpServers } from './list.js';
 import { loadSettings } from '../../config/settings.js';
 import { isWorkspaceTrusted } from '../../config/trustedFolders.js';
-import { createTransport, ExtensionManager } from '@qwen-code/qwen-code-core';
+import { createTransport, ExtensionManager } from '@jrcdev/boros-code-core';
 import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 
 vi.mock('../../config/settings.js', () => ({
@@ -17,7 +17,7 @@ vi.mock('../../config/settings.js', () => ({
 vi.mock('../../config/trustedFolders.js', () => ({
   isWorkspaceTrusted: vi.fn(),
 }));
-vi.mock('@qwen-code/qwen-code-core', () => ({
+vi.mock('@jrcdev/boros-code-core', () => ({
   createTransport: vi.fn(),
   MCPServerStatus: {
     CONNECTED: 'CONNECTED',

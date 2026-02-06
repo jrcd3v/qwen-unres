@@ -23,10 +23,10 @@ const projectHash = crypto
   .update(projectRoot)
   .digest('hex');
 
-// User-level .gemini directory in home
-const USER_GEMINI_DIR = path.join(os.homedir(), '.qwen');
-// Project-level .gemini directory in the workspace
-const WORKSPACE_GEMINI_DIR = path.join(projectRoot, '.qwen');
+// User-level boros directory in home
+const USER_GEMINI_DIR = path.join(os.homedir(), '.boros');
+// Project-level boros directory in the workspace
+const WORKSPACE_GEMINI_DIR = path.join(projectRoot, '.boros');
 
 // Telemetry artifacts are stored in a hashed directory under the user's ~/.qwen/tmp
 export const OTEL_DIR = path.join(USER_GEMINI_DIR, 'tmp', projectHash, 'otel');
@@ -41,12 +41,12 @@ export const WORKSPACE_SETTINGS_FILE = path.join(
 export function getJson(url) {
   const tmpFile = path.join(
     os.tmpdir(),
-    `qwen-code-releases-${Date.now()}.json`,
+    `boros-code-releases-${Date.now()}.json`,
   );
   try {
     const result = spawnSync(
       'curl',
-      ['-sL', '-H', 'User-Agent: qwen-code-dev-script', '-o', tmpFile, url],
+      ['-sL', '-H', 'User-Agent: boros-code-dev-script', '-o', tmpFile, url],
       { stdio: 'pipe', encoding: 'utf-8' },
     );
     if (result.status !== 0) {
@@ -250,7 +250,9 @@ export async function ensureBinary(
   }
 
   const downloadUrl = asset.browser_download_url;
-  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'qwen-code-telemetry-'));
+  const tmpDir = fs.mkdtempSync(
+    path.join(os.tmpdir(), 'boros-code-telemetry-'),
+  );
   const archivePath = path.join(tmpDir, asset.name);
 
   try {

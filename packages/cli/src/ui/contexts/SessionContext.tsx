@@ -18,8 +18,8 @@ import type {
   SessionMetrics,
   ModelMetrics,
   ToolCallStats,
-} from '@qwen-code/qwen-code-core';
-import { uiTelemetryService } from '@qwen-code/qwen-code-core';
+} from '@jrcdev/boros-code-core';
+import { uiTelemetryService } from '@jrcdev/boros-code-core';
 
 export enum ToolCallDecision {
   ACCEPT = 'accept',

@@ -1,4 +1,4 @@
-# @qwen-code/sdk
+# @jrcdev/boros-code-sdk
 
 A minimum experimental TypeScript SDK for programmatic access to Qwen Code.
 
@@ -7,7 +7,7 @@ Feel free to submit a feature request/issue/PR.
 ## Installation
 
 ```bash
-npm install @qwen-code/sdk
+npm install @jrcdev/boros-code-sdk
 ```
 
 ## Requirements
@@ -19,7 +19,7 @@ npm install @qwen-code/sdk
 ## Quick Start
 
 ```typescript
-import { query } from '@qwen-code/sdk';
+import { query } from '@jrcdev/boros-code-sdk';
 
 // Single-turn query
 const result = query({
@@ -106,7 +106,7 @@ import {
   isSDKSystemMessage,
   isSDKResultMessage,
   isSDKPartialAssistantMessage,
-} from '@qwen-code/sdk';
+} from '@jrcdev/boros-code-sdk';
 
 for await (const message of result) {
   if (isSDKAssistantMessage(message)) {
@@ -166,7 +166,7 @@ The SDK supports different permission modes for controlling tool execution:
 ### Multi-turn Conversation
 
 ```typescript
-import { query, type SDKUserMessage } from '@qwen-code/sdk';
+import { query, type SDKUserMessage } from '@jrcdev/boros-code-sdk';
 
 async function* generateMessages(): AsyncIterable<SDKUserMessage> {
   yield {
@@ -200,7 +200,7 @@ for await (const message of result) {
 ### Custom Permission Handler
 
 ```typescript
-import { query, type CanUseTool } from '@qwen-code/sdk';
+import { query, type CanUseTool } from '@jrcdev/boros-code-sdk';
 
 const canUseTool: CanUseTool = async (toolName, input, { signal }) => {
   // Allow all read operations
@@ -229,7 +229,7 @@ const result = query({
 ### With External MCP Servers
 
 ```typescript
-import { query } from '@qwen-code/sdk';
+import { query } from '@jrcdev/boros-code-sdk';
 
 const result = query({
   prompt: 'Use the custom tool from my MCP server',
@@ -289,7 +289,7 @@ Returns a `McpSdkServerConfigWithInstance` object that can be passed directly to
 
 ```typescript
 import { z } from 'zod';
-import { query, tool, createSdkMcpServer } from '@qwen-code/sdk';
+import { query, tool, createSdkMcpServer } from '@jrcdev/boros-code-sdk';
 
 // Define a tool with Zod schema
 const calculatorTool = tool(
@@ -326,7 +326,7 @@ for await (const message of result) {
 ### Abort a Query
 
 ```typescript
-import { query, isAbortError } from '@qwen-code/sdk';
+import { query, isAbortError } from '@jrcdev/boros-code-sdk';
 
 const abortController = new AbortController();
 
@@ -358,7 +358,7 @@ try {
 The SDK provides an `AbortError` class for handling aborted queries:
 
 ```typescript
-import { AbortError, isAbortError } from '@qwen-code/sdk';
+import { AbortError, isAbortError } from '@jrcdev/boros-code-sdk';
 
 try {
   // ... query operations

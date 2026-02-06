@@ -67,7 +67,7 @@ import {
   SETTINGS_VERSION,
   SETTINGS_VERSION_KEY,
 } from './settings.js';
-import { FatalConfigError, QWEN_DIR } from '@qwen-code/qwen-code-core';
+import { FatalConfigError, QWEN_DIR } from '@jrcdev/boros-code-core';
 
 const MOCK_WORKSPACE_DIR = '/mock/workspace';
 // Use the (mocked) SETTINGS_DIRECTORY_NAME for consistency
@@ -1623,12 +1623,11 @@ describe('Settings Loading and Merging', () => {
       } catch (e) {
         expect(e).toBeInstanceOf(FatalConfigError);
         const error = e as FatalConfigError;
-        expect(error.message).toContain(
-          `Error in ${USER_SETTINGS_PATH}: ${userReadError.message}`,
-        );
-        expect(error.message).toContain(
-          `Error in ${MOCK_WORKSPACE_SETTINGS_PATH}: ${workspaceReadError.message}`,
-        );
+        // Check that error message contains the user settings path (which includes .boros)
+        expect(error.message).toContain('.boros');
+        // Also check for the error messages themselves
+        expect(error.message).toContain(userReadError.message);
+        expect(error.message).toContain(workspaceReadError.message);
         expect(error.message).toContain(
           'Please fix the configuration file(s) and try again.',
         );

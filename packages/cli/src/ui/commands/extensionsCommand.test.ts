@@ -21,11 +21,11 @@ import {
   type Extension,
   ExtensionManager,
   parseInstallSource,
-} from '@qwen-code/qwen-code-core';
+} from '@jrcdev/boros-code-core';
 
-vi.mock('@qwen-code/qwen-code-core', async (importOriginal) => {
+vi.mock('@jrcdev/boros-code-core', async (importOriginal) => {
   const actual =
-    await importOriginal<typeof import('@qwen-code/qwen-code-core')>();
+    await importOriginal<typeof import('@jrcdev/boros-code-core')>();
   return {
     ...actual,
     parseInstallSource: vi.fn(),

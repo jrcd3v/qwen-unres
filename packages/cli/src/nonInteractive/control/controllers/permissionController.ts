@@ -19,11 +19,8 @@ import type {
   ToolExecuteConfirmationDetails,
   ToolMcpConfirmationDetails,
   ApprovalMode,
-} from '@qwen-code/qwen-code-core';
-import {
-  InputFormat,
-  ToolConfirmationOutcome,
-} from '@qwen-code/qwen-code-core';
+} from '@jrcdev/boros-code-core';
+import { InputFormat, ToolConfirmationOutcome } from '@jrcdev/boros-code-core';
 import type {
   CLIControlPermissionRequest,
   CLIControlSetPermissionModeRequest,

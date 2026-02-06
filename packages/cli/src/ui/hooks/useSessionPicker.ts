@@ -18,7 +18,7 @@ import type {
   ListSessionsResult,
   SessionListItem,
   SessionService,
-} from '@qwen-code/qwen-code-core';
+} from '@jrcdev/boros-code-core';
 import {
   filterSessions,
   SESSION_PAGE_SIZE,

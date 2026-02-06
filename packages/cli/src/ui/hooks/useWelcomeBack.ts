@@ -9,7 +9,7 @@ import {
   getProjectSummaryInfo,
   type ProjectSummaryInfo,
   type Config,
-} from '@qwen-code/qwen-code-core';
+} from '@jrcdev/boros-code-core';
 import { type Settings } from '../../config/settingsSchema.js';
 
 export interface WelcomeBackState {

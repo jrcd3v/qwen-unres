@@ -199,7 +199,7 @@ function filterMcpConfig(original: MCPServerConfig): MCPServerConfig {
 
 function getContextFileNames(config: ExtensionConfig): string[] {
   if (!config.contextFileName || config.contextFileName.length === 0) {
-    return ['QWEN.md'];
+    return ['BOROS.md'];
   } else if (!Array.isArray(config.contextFileName)) {
     return [config.contextFileName];
   }

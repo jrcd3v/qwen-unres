@@ -20,7 +20,7 @@ import { SkillError, SkillErrorCode } from './types.js';
 import type { Config } from '../config/config.js';
 import { validateConfig } from './skill-load.js';
 
-const QWEN_CONFIG_DIR = '.qwen';
+const BOROS_CONFIG_DIR = '.boros';
 const SKILLS_CONFIG_DIR = 'skills';
 const SKILL_MANIFEST_FILE = 'SKILL.md';
 
@@ -357,10 +357,10 @@ export class SkillManager {
       level === 'project'
         ? path.join(
             this.config.getProjectRoot(),
-            QWEN_CONFIG_DIR,
+            BOROS_CONFIG_DIR,
             SKILLS_CONFIG_DIR,
           )
-        : path.join(os.homedir(), QWEN_CONFIG_DIR, SKILLS_CONFIG_DIR);
+        : path.join(os.homedir(), BOROS_CONFIG_DIR, SKILLS_CONFIG_DIR);
 
     return baseDir;
   }

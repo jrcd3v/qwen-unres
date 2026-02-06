@@ -15,7 +15,7 @@ import {
   MAINLINE_VLM,
   MAINLINE_CODER,
 } from './availableModels.js';
-import { AuthType, type Config } from '@qwen-code/qwen-code-core';
+import { AuthType, type Config } from '@jrcdev/boros-code-core';
 
 describe('availableModels', () => {
   describe('AVAILABLE_MODELS_QWEN', () => {

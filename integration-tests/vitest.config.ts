@@ -1,8 +1,6 @@
-/**
- * @license
- * Copyright 2025 Qwen Team
- * SPDX-License-Identifier: Apache-2.0
- */
+/*
+ Copyright 2025 JRCDev - For Authorized Use Only
+*/
 
 import { defineConfig } from 'vitest/config';
 import { dirname, resolve } from 'node:path';
@@ -31,7 +29,7 @@ export default defineConfig({
   resolve: {
     alias: {
       // Use built SDK bundle for e2e tests
-      '@qwen-code/sdk': resolve(
+      '@jrcdev/boros-code/sdk': resolve(
         __dirname,
         '../packages/sdk-typescript/dist/index.mjs',
       ),

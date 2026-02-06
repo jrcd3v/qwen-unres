@@ -6,7 +6,7 @@
 
 import type { CommandModule } from 'yargs';
 import { getErrorMessage } from '../../utils/errors.js';
-import { ExtensionManager } from '@qwen-code/qwen-code-core';
+import { ExtensionManager } from '@jrcdev/boros-code-core';
 import {
   requestConsentNonInteractive,
   requestConsentOrFail,

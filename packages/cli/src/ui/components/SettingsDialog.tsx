@@ -29,7 +29,7 @@ import {
 } from '../../utils/settingsUtils.js';
 import { updateOutputLanguageFile } from '../../utils/languageUtils.js';
 import { useVimMode } from '../contexts/VimModeContext.js';
-import { type Config } from '@qwen-code/qwen-code-core';
+import { type Config } from '@jrcdev/boros-code-core';
 import { useKeypress } from '../hooks/useKeypress.js';
 import chalk from 'chalk';
 import { cpSlice, cpLen, stripUnsafeCharacters } from '../utils/textUtils.js';

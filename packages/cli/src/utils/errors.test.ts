@@ -5,12 +5,12 @@
  */
 
 import { vi, type Mock, type MockInstance } from 'vitest';
-import type { Config } from '@qwen-code/qwen-code-core';
+import type { Config } from '@jrcdev/boros-code-core';
 import {
   OutputFormat,
   FatalInputError,
   ToolErrorType,
-} from '@qwen-code/qwen-code-core';
+} from '@jrcdev/boros-code-core';
 import {
   getErrorMessage,
   handleError,
@@ -20,9 +20,9 @@ import {
 } from './errors.js';
 
 // Mock the core modules
-vi.mock('@qwen-code/qwen-code-core', async (importOriginal) => {
+vi.mock('@jrcdev/boros-code-core', async (importOriginal) => {
   const original =
-    await importOriginal<typeof import('@qwen-code/qwen-code-core')>();
+    await importOriginal<typeof import('@jrcdev/boros-code-core')>();
 
   return {
     ...original,

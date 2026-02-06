@@ -6,7 +6,7 @@
 
 /**
  * E2E tests for MCP (Model Context Protocol) server integration via SDK
- * Tests that the SDK can properly interact with MCP servers configured in qwen-code
+ * Tests that the SDK can properly interact with MCP servers configured in boros-code
  */
 
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
@@ -20,7 +20,7 @@ import {
   type ToolUseBlock,
   type SDKSystemMessage,
   type SDKUserMessage,
-} from '@qwen-code/sdk';
+} from '@jrcdev/boros-code/sdk';
 import {
   SDKTestHelper,
   createMCPServer,

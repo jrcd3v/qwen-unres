@@ -11,7 +11,7 @@ import {
   resolveModelConfig,
   type ModelConfigSourcesInput,
   type ProviderModelConfig,
-} from '@qwen-code/qwen-code-core';
+} from '@jrcdev/boros-code-core';
 import type { Settings } from '../config/settings.js';
 
 export interface CliGenerationConfigInputs {

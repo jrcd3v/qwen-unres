@@ -117,9 +117,9 @@ vi.mock('../tools/read-many-files', () => ({
 vi.mock('../tools/memoryTool', () => ({
   MemoryTool: createToolMock('save_memory'),
   setGeminiMdFilename: vi.fn(),
-  getCurrentGeminiMdFilename: vi.fn(() => 'QWEN.md'), // Mock the original filename
-  DEFAULT_CONTEXT_FILENAME: 'QWEN.md',
-  QWEN_CONFIG_DIR: '.qwen',
+  getCurrentGeminiMdFilename: vi.fn(() => 'BOROS.md'), // Mock the original filename
+  DEFAULT_CONTEXT_FILENAME: 'BOROS.md',
+  QWEN_CONFIG_DIR: '.boros',
 }));
 
 vi.mock('../core/contentGenerator.js');

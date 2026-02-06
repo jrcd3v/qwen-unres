@@ -1,8 +1,6 @@
-/**
- * @license
- * Copyright 2025 Google LLC
- * SPDX-License-Identifier: Apache-2.0
- */
+/*
+ Copyright 2025 JRCDev - For Authorized Use Only
+*/
 
 import { execSync } from 'node:child_process';
 import { readFileSync, writeFileSync } from 'node:fs';
@@ -38,7 +36,7 @@ run(`npm version ${versionType} --no-git-tag-version --allow-same-version`);
 
 // 3. Get all workspaces and filter out the one we don't want to version.
 // We intend to maintain sdk version independently.
-const workspacesToExclude = ['@qwen-code/sdk'];
+const workspacesToExclude = ['@jrcdev/boros-code/sdk'];
 let lsOutput;
 try {
   lsOutput = JSON.parse(

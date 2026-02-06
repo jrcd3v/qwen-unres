@@ -16,7 +16,7 @@ import {
   SlashCommandStatus,
   ToolConfirmationOutcome,
   IdeClient,
-} from '@qwen-code/qwen-code-core';
+} from '@jrcdev/boros-code-core';
 import { useSessionStats } from '../contexts/SessionContext.js';
 import type {
   Message,

@@ -6,10 +6,7 @@
 
 import type { CommandModule } from 'yargs';
 
-import {
-  ExtensionManager,
-  parseInstallSource,
-} from '@qwen-code/qwen-code-core';
+import { ExtensionManager, parseInstallSource } from '@jrcdev/boros-code-core';
 import { getErrorMessage } from '../../utils/errors.js';
 import { isWorkspaceTrusted } from '../../config/trustedFolders.js';
 import { loadSettings } from '../../config/settings.js';

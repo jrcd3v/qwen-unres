@@ -9,7 +9,7 @@ import {
   DEFAULT_QWEN_MODEL,
   type Config,
   type AvailableModel as CoreAvailableModel,
-} from '@qwen-code/qwen-code-core';
+} from '@jrcdev/boros-code-core';
 import { t } from '../../i18n/index.js';
 
 export type AvailableModel = {

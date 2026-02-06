@@ -1,6 +1,6 @@
 {
-  "name": "@qwen-code/qwen-code",
-  "version": "0.10.0",
+  "name": "@jrcdev/boros-code",
+  "version": "0.0.1",
   "engines": {
     "node": ">=20.0.0"
   },
@@ -10,10 +10,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/QwenLM/qwen-code.git"
+    "url": "git+https://github.com/jrcd3v/boros-code.git"
   },
   "config": {
-    "sandboxImageUri": "ghcr.io/qwenlm/qwen-code:0.10.0"
+    "sandboxImageUri": "ghcr.io/jrcd3v/boros-code:0.0.1"
   },
   "scripts": {
     "start": "cross-env node scripts/start.js",
@@ -67,7 +67,7 @@
     "baseline-browser-mapping": "^2.9.19"
   },
   "bin": {
-    "qwen": "dist/cli.js"
+    "boros": "dist/cli.js"
   },
   "files": [
     "dist/",

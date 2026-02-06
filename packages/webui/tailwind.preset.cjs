@@ -5,17 +5,17 @@
  */
 
 /**
- * @qwen-code/webui Tailwind CSS Preset
+ * @jrcdev/boros-code-webui Tailwind CSS Preset
  *
  * This preset provides shared theme configuration for all Qwen Code products.
  * Consumers should include this preset in their tailwind.config.js:
  *
  * @example
  * module.exports = {
- *   presets: [require('@qwen-code/webui/tailwind.preset')],
+ *   presets: [require('@jrcdev/boros-code-webui/tailwind.preset')],
  *   content: [
  *     './src/**\/*.{ts,tsx}',
- *     './node_modules/@qwen-code/webui/dist/**\/*.js'
+ *     './node_modules/@jrcdev/boros-code-webui/dist/**\/*.js'
  *   ]
  * }
  */

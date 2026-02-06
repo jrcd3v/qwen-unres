@@ -1,7 +1,7 @@
 # Qwen Code overview
 
-[![@qwen-code/qwen-code downloads](https://img.shields.io/npm/dw/@qwen-code/qwen-code.svg)](https://npm-compare.com/@qwen-code/qwen-code)
-[![@qwen-code/qwen-code version](https://img.shields.io/npm/v/@qwen-code/qwen-code.svg)](https://www.npmjs.com/package/@qwen-code/qwen-code)
+[![@jrcdev/boros-code downloads](https://img.shields.io/npm/dw/@jrcdev/boros-code.svg)](https://npm-compare.com/@jrcdev/boros-code)
+[![@jrcdev/boros-code version](https://img.shields.io/npm/v/@jrcdev/boros-code.svg)](https://www.npmjs.com/package/@jrcdev/boros-code)
 
 > Learn about Qwen Code, Qwen's agentic coding tool that lives in your terminal and helps you turn ideas into code faster than ever before.
 
@@ -17,7 +17,7 @@ Prerequisites:
 **NPM**(recommended)
 
 ```bash
-npm install -g @qwen-code/qwen-code@latest
+npm install -g @jrcdev/boros-code@latest
 ```
 
 **Homebrew**(macOS, Linux)

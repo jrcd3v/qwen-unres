@@ -183,7 +183,7 @@ class GrepToolInvocation extends BaseToolInvocation<
       pattern,
     ];
 
-    // Add file exclusions from .gitignore and .qwenignore
+    // Add file exclusions from .gitignore and .borosignore
     const filteringOptions = this.getFileFilteringOptions();
     if (!filteringOptions.respectGitIgnore) {
       rgArgs.push('--no-ignore-vcs');
@@ -192,7 +192,7 @@ class GrepToolInvocation extends BaseToolInvocation<
     if (filteringOptions.respectQwenIgnore) {
       const qwenIgnorePath = path.join(
         this.config.getTargetDir(),
-        '.qwenignore',
+        '.borosignore',
       );
       if (fs.existsSync(qwenIgnorePath)) {
         rgArgs.push('--ignore-file', qwenIgnorePath);

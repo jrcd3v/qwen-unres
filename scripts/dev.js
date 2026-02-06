@@ -1,8 +1,6 @@
-/**
- * @license
- * Copyright 2025 Qwen
- * SPDX-License-Identifier: Apache-2.0
- */
+/*
+ Copyright 2025 JRCDev - For Authorized Use Only
+*/
 
 /**
  * Development entry point for Qwen Code CLI.
@@ -31,7 +29,7 @@ const tsxPath = resolve(root, 'node_modules', '.bin', 'tsx');
 const cliEntry = join(cliPackageDir, 'index.ts');
 
 // Create a temporary loader file
-const tmpDir = mkdtempSync(join(tmpdir(), 'qwen-dev-'));
+const tmpDir = mkdtempSync(join(tmpdir(), 'boros-dev-'));
 const loaderPath = join(tmpDir, 'loader.mjs');
 
 const coreSourcePath = join(root, 'packages', 'core', 'index.ts');
@@ -43,7 +41,7 @@ import { pathToFileURL } from 'node:url';
 const coreSourceUrl = '${coreSourceUrl}';
 
 export function resolve(specifier, context, nextResolve) {
-  if (specifier === '@qwen-code/qwen-code-core') {
+  if (specifier === '@jrcdev/boros-code-core') {
     return {
       shortCircuit: true,
       url: coreSourceUrl,

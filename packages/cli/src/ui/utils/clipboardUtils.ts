@@ -6,7 +6,7 @@
 
 import * as fs from 'node:fs/promises';
 import * as path from 'node:path';
-import { execCommand } from '@qwen-code/qwen-code-core';
+import { execCommand } from '@jrcdev/boros-code-core';
 
 const MACOS_CLIPBOARD_TIMEOUT_MS = 1500;
 

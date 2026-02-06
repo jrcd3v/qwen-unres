@@ -24,7 +24,7 @@ const mockRequestConsentOrFail = vi.hoisted(() => vi.fn());
 const mockIsWorkspaceTrusted = vi.hoisted(() => vi.fn());
 const mockLoadSettings = vi.hoisted(() => vi.fn());
 
-vi.mock('@qwen-code/qwen-code-core', () => ({
+vi.mock('@jrcdev/boros-code-core', () => ({
   ExtensionManager: vi.fn().mockImplementation(() => ({
     installExtension: mockInstallExtension,
     refreshCache: mockRefreshCache,

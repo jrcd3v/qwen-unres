@@ -38,7 +38,7 @@ import {
   getAllGeminiMdFilenames,
   ShellExecutionService,
   Storage,
-} from '@qwen-code/qwen-code-core';
+} from '@jrcdev/boros-code-core';
 import { buildResumedHistoryItems } from './utils/resumeHistoryUtils.js';
 import { validateAuthMethod } from '../config/auth.js';
 import { loadHierarchicalGeminiMemory } from '../config/config.js';
@@ -888,9 +888,9 @@ export const AppContainer = (props: AppContainerProps) => {
   }, []);
   const shouldShowIdePrompt = Boolean(
     currentIDE &&
-      !config.getIdeMode() &&
-      !settings.merged.ide?.hasSeenNudge &&
-      !idePromptAnswered,
+    !config.getIdeMode() &&
+    !settings.merged.ide?.hasSeenNudge &&
+    !idePromptAnswered,
   );
 
   // Command migration nudge

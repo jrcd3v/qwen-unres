@@ -1,16 +1,14 @@
-/**
- * @license
- * Copyright 2025 Google LLC
- * SPDX-License-Identifier: Apache-2.0
- */
+/*
+ Copyright 2025 JRCDev - For Authorized Use Only
+*/
 
 import * as vscode from 'vscode';
 import {
   CloseDiffRequestSchema,
   IdeContextNotificationSchema,
   OpenDiffRequestSchema,
-} from '@qwen-code/qwen-code-core/src/ide/types.js';
-import { detectIdeFromEnv } from '@qwen-code/qwen-code-core/src/ide/detect-ide.js';
+} from '@jrcdev/boros-code-core/src/ide/types.js';
+import { detectIdeFromEnv } from '@jrcdev/boros-code-core/src/ide/detect-ide.js';
 import { isInitializeRequest } from '@modelcontextprotocol/sdk/types.js';
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js';
@@ -38,17 +36,17 @@ class CORSError extends Error {
 }
 
 const MCP_SESSION_ID_HEADER = 'mcp-session-id';
-const IDE_SERVER_PORT_ENV_VAR = 'QWEN_CODE_IDE_SERVER_PORT';
-const IDE_WORKSPACE_PATH_ENV_VAR = 'QWEN_CODE_IDE_WORKSPACE_PATH';
-const QWEN_DIR = '.qwen';
+const IDE_SERVER_PORT_ENV_VAR = 'BOROS_CODE_IDE_SERVER_PORT';
+const IDE_WORKSPACE_PATH_ENV_VAR = 'BOROS_CODE_IDE_WORKSPACE_PATH';
+const BOROS_DIR = '.boros';
 const IDE_DIR = 'ide';
 
 async function getGlobalIdeDir(): Promise<string> {
   const homeDir = os.homedir();
   // Prefer home dir, but fall back to tmpdir if unavailable (matches core Storage behavior).
   const baseDir = homeDir
-    ? path.join(homeDir, QWEN_DIR)
-    : path.join(os.tmpdir(), QWEN_DIR);
+    ? path.join(homeDir, BOROS_DIR)
+    : path.join(os.tmpdir(), BOROS_DIR);
   const ideDir = path.join(baseDir, IDE_DIR);
   await fs.mkdir(ideDir, { recursive: true });
   return ideDir;
