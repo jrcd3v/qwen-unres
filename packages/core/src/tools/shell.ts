@@ -279,7 +279,13 @@ export class ShellToolInvocation extends BaseToolInvocation<
             }
           }
         } else {
-          if (!signal.aborted) {
+          // pgrep output can legitimately be empty for very fast commands that exit
+          // before the monitoring logic runs. Only log as an error when the command
+          // did not complete successfully and the signal was not aborted explicitly.
+          if (
+            !signal.aborted &&
+            (result.exitCode !== 0 || result.error || result.signal)
+          ) {
             console.error('missing pgrep output');
           }
         }
