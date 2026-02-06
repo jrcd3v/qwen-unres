@@ -41,7 +41,7 @@ export class QwenContentGenerator extends OpenAIContentGenerator {
 
     // Initialize with DashScope provider
     super(contentGeneratorConfig, cliConfig, dashscopeProvider);
-    this.borosClient = qwenClient;
+    this.qwenClient = qwenClient;
     this.sharedManager = SharedTokenManager.getInstance();
 
     // Set default base URL, will be updated dynamically
@@ -86,7 +86,7 @@ export class QwenContentGenerator extends OpenAIContentGenerator {
     try {
       // Use SharedTokenManager for consistent token/endpoint pairing and automatic refresh
       const credentials = await this.sharedManager.getValidCredentials(
-        this.borosClient,
+        this.qwenClient,
       );
 
       if (!credentials.access_token) {
@@ -140,7 +140,7 @@ export class QwenContentGenerator extends OpenAIContentGenerator {
       if (this.isAuthError(error)) {
         // Use SharedTokenManager to properly refresh and persist the token
         // This ensures the refreshed token is saved to oauth_creds.json
-        await this.sharedManager.getValidCredentials(this.borosClient, true);
+        await this.sharedManager.getValidCredentials(this.qwenClient, true);
         return await attemptOperation();
       }
       throw error;

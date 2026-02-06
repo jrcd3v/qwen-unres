@@ -32,7 +32,7 @@ export class FileDiscoveryService {
     if (isGitRepository(this.projectRoot)) {
       this.gitIgnoreFilter = new GitIgnoreParser(this.projectRoot);
     }
-    this.borosIgnoreFilter = new QwenIgnoreParser(this.projectRoot);
+    this.qwenIgnoreFilter = new QwenIgnoreParser(this.projectRoot);
   }
 
   /**
@@ -106,8 +106,8 @@ export class FileDiscoveryService {
    * Checks if a single file should be qwen-ignored
    */
   shouldQwenIgnoreFile(filePath: string): boolean {
-    if (this.borosIgnoreFilter) {
-      return this.borosIgnoreFilter.isIgnored(filePath);
+    if (this.qwenIgnoreFilter) {
+      return this.qwenIgnoreFilter.isIgnored(filePath);
     }
     return false;
   }
@@ -137,6 +137,6 @@ export class FileDiscoveryService {
    * Returns loaded patterns from .borosignore
    */
   getQwenIgnorePatterns(): string[] {
-    return this.borosIgnoreFilter?.getPatterns() ?? [];
+    return this.qwenIgnoreFilter?.getPatterns() ?? [];
   }
 }

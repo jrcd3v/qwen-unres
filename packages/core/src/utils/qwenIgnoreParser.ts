@@ -24,13 +24,18 @@ export class QwenIgnoreParser implements QwenIgnoreFilter {
   }
 
   private loadPatterns(): void {
-    const patternsFilePath = path.join(this.projectRoot, '.borosignore');
-    let content: string;
+    const borosPath = path.join(this.projectRoot, '.borosignore');
+    const qwenPath = path.join(this.projectRoot, '.qwenignore');
+    let content: string | undefined;
     try {
-      content = fs.readFileSync(patternsFilePath, 'utf-8');
-    } catch (_error) {
-      // ignore file not found
-      return;
+      content = fs.readFileSync(borosPath, 'utf-8');
+    } catch (_e) {
+      try {
+        content = fs.readFileSync(qwenPath, 'utf-8');
+      } catch (_e2) {
+        // ignore file not found for both names
+        return;
+      }
     }
 
     this.patterns = (content ?? '')
