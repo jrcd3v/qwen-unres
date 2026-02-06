@@ -272,11 +272,12 @@ export class TestRig {
 
     if (
       typeof promptOrOptions === 'object' &&
-      !promptOrOptions.stdinDoesNotEnd
+      promptOrOptions.stdinDoesNotEnd
     ) {
+      // stdin should not be ended, leave it open
+    } else {
       child.stdin!.end();
     }
-    child.stdin!.end();
 
     child.stdout!.on('data', (data: Buffer) => {
       stdout += data;
