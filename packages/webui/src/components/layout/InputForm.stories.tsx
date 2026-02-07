@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import type { Meta, StoryObj, StoryFn, Decorator } from '@storybook/react-vite';
+import type { Meta, StoryObj, StoryFn } from '@storybook/react-vite';
 import type { FC } from 'react';
 import { useRef } from 'react';
 import { InputForm, getEditModeIcon } from './InputForm.js';
@@ -16,7 +16,7 @@ type InputFormStoryProps = Omit<InputFormProps, 'inputFieldRef'>;
  * Wrapper component to provide inputFieldRef
  */
 const InputFormWrapper: FC<InputFormStoryProps> = (props) => {
-  const inputFieldRef = useRef<HTMLDivElement>(null);
+  const inputFieldRef = useRef<HTMLDivElement>(null) as React.RefObject<HTMLDivElement>;
   return <InputForm {...props} inputFieldRef={inputFieldRef} />;
 };
 
@@ -55,7 +55,7 @@ const meta: Meta<InputFormStoryProps> = {
     onCompletionClose: { action: 'completionClose' },
   },
   decorators: [
-    ((Story: StoryFn) => (
+    (Story: StoryFn) => (
       <div
         style={{
           height: '200px',
@@ -63,14 +63,16 @@ const meta: Meta<InputFormStoryProps> = {
           background: 'var(--app-background, #1e1e1e)',
         }}
       >
-        <Story />
+        {(Story as any)()}
       </div>
-    )) as Decorator,
+    ),
   ],
 };
 
 export default meta;
 type Story = StoryObj<typeof meta>;
+
+
 
 const defaultArgs: Partial<InputFormStoryProps> = {
   inputText: '',
@@ -152,7 +154,7 @@ export const WithCompletionMenu: Story = {
     ],
   },
   decorators: [
-    ((Story: StoryFn) => (
+    (Story: StoryFn) => (
       <div
         style={{
           height: '300px',
@@ -160,9 +162,9 @@ export const WithCompletionMenu: Story = {
           background: 'var(--app-background, #1e1e1e)',
         }}
       >
-        <Story />
+        {(Story as any)()}
       </div>
-    )) as Decorator,
+    ),
   ],
 };
 

@@ -37,8 +37,8 @@ export const useSessionManagement = (vscode: VSCodeAPI) => {
     const query = sessionSearchQuery.toLowerCase();
     return qwenSessions.filter((session) => {
       const title = (
-        (session.title as string) ||
-        (session.name as string) ||
+        (session['title'] as string) ||
+        (session['name'] as string) ||
         ''
       ).toLowerCase();
       return title.includes(query);

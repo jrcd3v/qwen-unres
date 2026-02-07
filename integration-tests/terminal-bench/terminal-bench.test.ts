@@ -89,20 +89,22 @@ describe('terminal-bench integration', () => {
 
   let testTasks = [...baseTestTasks];
   if (envTaskId || envTaskIds) {
-    const selected = (envTaskIds || envTaskId || '')
+    const selectedRaw = (envTaskIds || envTaskId || '')
       .split(',')
       .map((s) => s.trim())
-      .filter(Boolean);
+      .filter((s): s is typeof baseTestTasks[number] => 
+        Boolean(s) && baseTestTasks.includes(s as typeof baseTestTasks[number])
+      );
 
     const available = new Set(baseTestTasks.map((t) => t));
-    const unknown = selected.filter((s) => !available.has(s));
+    const unknown = selectedRaw.filter((s) => !available.has(s));
     if (unknown.length > 0) {
       throw new Error(
         `Unknown TB task id(s): ${unknown.join(', ')}. Available: ${[...available].join(', ')}`,
       );
     }
 
-    testTasks = baseTestTasks.filter((t) => selected.includes(t));
+    testTasks = baseTestTasks.filter((t) => selectedRaw.includes(t));
 
     if (testTasks.length === 0) {
       throw new Error('No tasks selected via TB_TASK_ID/TB_TASK_IDS.');

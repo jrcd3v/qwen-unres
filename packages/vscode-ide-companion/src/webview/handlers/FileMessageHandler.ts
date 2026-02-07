@@ -64,13 +64,15 @@ export class FileMessageHandler extends BaseMessageHandler {
 
       case 'getWorkspaceFiles':
         await this.handleGetWorkspaceFiles(
-          data?.query as string | undefined,
-          data?.requestId as number | undefined,
+          typeof data?.['query'] === 'string' ? (data['query'] as string) : undefined,
+          typeof data?.['requestId'] === 'number' ? (data['requestId'] as number) : undefined,
         );
         break;
 
       case 'openFile':
-        await this.handleOpenFile(data?.path as string | undefined);
+        await this.handleOpenFile(
+          typeof data?.['path'] === 'string' ? (data['path'] as string) : undefined,
+        );
         break;
 
       case 'openDiff':
@@ -439,9 +441,9 @@ export class FileMessageHandler extends BaseMessageHandler {
 
     try {
       await vscode.commands.executeCommand(showDiffCommand, {
-        path: (data.path as string) || '',
-        oldText: (data.oldText as string) || '',
-        newText: (data.newText as string) || '',
+        path: (data['path'] as string) || '',
+        oldText: (data['oldText'] as string) || '',
+        newText: (data['newText'] as string) || '',
       });
     } catch (error) {
       console.error('[FileMessageHandler] Failed to open diff:', error);
@@ -463,8 +465,8 @@ export class FileMessageHandler extends BaseMessageHandler {
     }
 
     try {
-      const content = (data.content as string) || '';
-      const fileName = (data.fileName as string) || 'temp';
+      const content = (data['content'] as string) || '';
+      const fileName = (data['fileName'] as string) || 'temp';
 
       // Get readonly file system provider from global singleton
       const readonlyProvider = ReadonlyFileSystemProvider.getInstance();

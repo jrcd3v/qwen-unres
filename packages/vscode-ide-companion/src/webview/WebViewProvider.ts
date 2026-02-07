@@ -36,7 +36,7 @@ export class WebViewProvider {
   private cachedAvailableModels: ModelInfo[] | null = null;
 
   constructor(
-    private context: vscode.ExtensionContext,
+    context: vscode.ExtensionContext,
     private extensionUri: vscode.Uri,
   ) {
     this.agentManager = new QwenAgentManager();
@@ -190,10 +190,10 @@ export class WebViewProvider {
       // If sessionUpdate is missing, infer from content:
       // - If has kind/title/rawInput, it's likely initial tool_call
       // - If only has status/content updates, it's tool_call_update
-      let messageType = updateData.sessionUpdate as string | undefined;
+      let messageType = updateData['sessionUpdate'] as string | undefined;
       if (!messageType) {
         // Infer type: if has kind or title, assume initial call; otherwise update
-        if (updateData.kind || updateData.title || updateData.rawInput) {
+        if (updateData['kind'] || updateData['title'] || updateData['rawInput']) {
           messageType = 'tool_call';
         } else {
           messageType = 'tool_call_update';

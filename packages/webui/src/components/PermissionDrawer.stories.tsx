@@ -6,7 +6,7 @@
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
-import PermissionDrawer from './PermissionDrawer.js';
+import { PermissionDrawer } from './PermissionDrawer.js';
 import type {
   PermissionOption,
   PermissionToolCall,
@@ -69,7 +69,7 @@ export const Default: Story = {
           isOpen={isOpen}
           options={options}
           toolCall={toolCall}
-          onResponse={(optionId) => {
+          onResponse={(optionId: string) => {
             console.log('[PermissionDrawer story] response:', optionId);
             setIsOpen(false);
           }}

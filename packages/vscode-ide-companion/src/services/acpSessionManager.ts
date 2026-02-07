@@ -325,10 +325,10 @@ export class AcpSessionManager {
       // session/list requires cwd in params per ACP schema
       const params: Record<string, unknown> = { cwd };
       if (options?.cursor !== undefined) {
-        params.cursor = options.cursor;
+        params['cursor'] = options['cursor'];
       }
       if (options?.size !== undefined) {
-        params.size = options.size;
+        params['size'] = options['size'];
       }
 
       const response = await this.sendRequest<AcpResponse>(

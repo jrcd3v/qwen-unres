@@ -782,15 +782,15 @@ export const useWebViewMessages = ({
           ) {
             const currentSession = sessions.find(
               (s: Record<string, unknown>) =>
-                (s.id as string) ===
+                (s['id'] as string) ===
                   handlers.sessionManagement.currentSessionId ||
-                (s.sessionId as string) ===
+                (s['sessionId'] as string) ===
                   handlers.sessionManagement.currentSessionId,
             );
             if (currentSession) {
               const title =
-                (currentSession.title as string) ||
-                (currentSession.name as string) ||
+                (currentSession['title'] as string) ||
+                (currentSession['name'] as string) ||
                 'Past Conversations';
               handlers.sessionManagement.setCurrentSessionTitle(title);
             }
@@ -808,8 +808,8 @@ export const useWebViewMessages = ({
           if (message.data.session) {
             const session = message.data.session as Record<string, unknown>;
             const title =
-              (session.title as string) ||
-              (session.name as string) ||
+              (session['title'] as string) ||
+              (session['name'] as string) ||
               'Past Conversations';
             handlers.sessionManagement.setCurrentSessionTitle(title);
             // Update the VS Code webview tab title as well

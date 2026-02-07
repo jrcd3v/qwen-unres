@@ -21,13 +21,13 @@ import { resolve } from 'path';
  */
 export default defineConfig({
   plugins: [
-    react(),
+    react() as any,
     dts({
       include: ['src'],
       outDir: 'dist',
       rollupTypes: true,
       insertTypesEntry: true,
-    }),
+    }) as any,
   ],
   build: {
     lib: {

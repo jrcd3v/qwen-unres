@@ -63,24 +63,21 @@ export class DiffManager {
   private readonly subscriptions: vscode.Disposable[] = [];
   // Dedupe: remember recent showDiff calls keyed by (file+content)
   private recentlyShown = new Map<string, number>();
-  private pendingDelayTimers = new Map<string, NodeJS.Timeout>();
   private static readonly DEDUPE_WINDOW_MS = 1500;
   // Optional hooks from extension to influence diff behavior
   // - shouldDelay: when true, we defer opening diffs briefly (e.g., while a permission drawer is open)
   // - shouldSuppress: when true, we skip opening diffs entirely (e.g., in auto/yolo mode)
-  private shouldDelay?: () => boolean;
-  private shouldSuppress?: () => boolean;
+  // Note: These are accepted as constructor parameters but not currently used in implementation
   // Timed suppression window (e.g. immediately after permission allow)
-  private suppressUntil: number | null = null;
+  // Note: Assigned but not currently used in implementation
 
   constructor(
     private readonly log: (message: string) => void,
     private readonly diffContentProvider: DiffContentProvider,
-    shouldDelay?: () => boolean,
-    shouldSuppress?: () => boolean,
+    _shouldDelay?: () => boolean,
+    _shouldSuppress?: () => boolean,
   ) {
-    this.shouldDelay = shouldDelay;
-    this.shouldSuppress = shouldSuppress;
+    // TODO: Implement shouldDelay/shouldSuppress logic if needed
     this.subscriptions.push(
       vscode.window.onDidChangeActiveTextEditor((editor) => {
         this.onActiveEditorChange(editor);
@@ -424,10 +421,5 @@ export class DiffManager {
   private makeKey(filePath: string, oldContent: string, newContent: string) {
     // Simple stable key; content could be large but kept transiently
     return `${filePath}\u241F${oldContent}\u241F${newContent}`;
-  }
-
-  /** Temporarily suppress opening diffs for a short duration. */
-  suppressFor(durationMs: number): void {
-    this.suppressUntil = Date.now() + Math.max(0, durationMs);
   }
 }

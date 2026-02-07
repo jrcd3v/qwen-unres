@@ -4,8 +4,10 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+/// <reference types="vitest/globals" />
+
+import { describe, expect, it, vi } from 'vitest';
 import { render } from 'ink-testing-library';
-import { describe, it, expect, vi } from 'vitest';
 import { SessionSummaryDisplay } from './SessionSummaryDisplay.js';
 import * as SessionContext from '../contexts/SessionContext.js';
 import type { SessionMetrics } from '../contexts/SessionContext.js';
@@ -36,6 +38,7 @@ const renderWithMockedStats = (
       promptCount,
     },
 
+    startNewSession: vi.fn(),
     getPromptCount: () => promptCount,
     startNewPrompt: vi.fn(),
   });
@@ -46,10 +49,11 @@ const renderWithMockedStats = (
     ),
   };
 
+  const width = 120;
   return render(
     <ConfigContext.Provider value={mockConfig as never}>
-      <SessionSummaryDisplay duration="1h 23m 45s" />
-    </ConfigContext.Provider>,
+      <SessionSummaryDisplay duration="1h 23m 45s" width={width} />
+    </ConfigContext.Provider>
   );
 };
 
@@ -74,7 +78,7 @@ describe('<SessionSummaryDisplay />', () => {
         totalSuccess: 0,
         totalFail: 0,
         totalDurationMs: 0,
-        totalDecisions: { accept: 0, reject: 0, modify: 0 },
+        totalDecisions: { accept: 0, reject: 0, modify: 0, auto_accept: 0 },
         byName: {},
       },
       files: {
@@ -100,7 +104,7 @@ describe('<SessionSummaryDisplay />', () => {
         totalSuccess: 0,
         totalFail: 0,
         totalDurationMs: 0,
-        totalDecisions: { accept: 0, reject: 0, modify: 0 },
+        totalDecisions: { accept: 0, reject: 0, modify: 0, auto_accept: 0 },
         byName: {},
       },
       files: {
@@ -130,7 +134,7 @@ describe('<SessionSummaryDisplay />', () => {
         totalSuccess: 0,
         totalFail: 0,
         totalDurationMs: 0,
-        totalDecisions: { accept: 0, reject: 0, modify: 0 },
+        totalDecisions: { accept: 0, reject: 0, modify: 0, auto_accept: 0 },
         byName: {},
       },
       files: {

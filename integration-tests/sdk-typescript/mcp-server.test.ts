@@ -20,7 +20,7 @@ import {
   type ToolUseBlock,
   type SDKSystemMessage,
   type SDKUserMessage,
-} from '@jrcdev/boros-code/sdk';
+} from '@jrcdev/boros-code-sdk';
 import {
   SDKTestHelper,
   createMCPServer,
@@ -190,7 +190,7 @@ describe('MCP Server Integration (E2E)', () => {
 
         // Find our test server
         const testServer = systemMessage!.mcp_servers?.find(
-          (server) => server.name === 'test-math-server',
+          (server: unknown) => (server as Record<string, unknown>)['name'] === 'test-math-server',
         );
         expect(testServer).toBeDefined();
 
@@ -417,7 +417,7 @@ describe('MCP Server Integration (E2E)', () => {
           ...SHARED_TEST_OPTIONS,
           cwd: testDir,
           permissionMode: 'default',
-          canUseTool: async (toolName) => {
+          canUseTool: async (toolName: string) => {
             canUseToolCalls.push({ toolName });
             return {
               behavior: 'allow',

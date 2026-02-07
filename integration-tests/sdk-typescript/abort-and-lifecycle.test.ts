@@ -15,7 +15,7 @@ import {
   type TextBlock,
   type ContentBlock,
   type SDKUserMessage,
-} from '@jrcdev/boros-code/sdk';
+} from '@jrcdev/boros-code-sdk';
 import {
   SDKTestHelper,
   createSharedTestOptions,
@@ -59,10 +59,10 @@ describe('AbortController and Process Lifecycle (E2E)', () => {
         for await (const message of q) {
           if (isSDKAssistantMessage(message)) {
             const textBlocks = message.message.content.filter(
-              (block): block is TextBlock => block.type === 'text',
+              (block: ContentBlock): block is TextBlock => block.type === 'text',
             );
             const text = textBlocks
-              .map((b) => b.text)
+              .map((b: TextBlock) => b.text)
               .join('')
               .slice(0, 100);
 
@@ -163,10 +163,10 @@ describe('AbortController and Process Lifecycle (E2E)', () => {
         for await (const message of q) {
           if (isSDKAssistantMessage(message)) {
             const textBlocks = message.message.content.filter(
-              (block): block is TextBlock => block.type === 'text',
+              (block: ContentBlock): block is TextBlock => block.type === 'text',
             );
             const text = textBlocks
-              .map((b) => b.text)
+              .map((b: TextBlock) => b.text)
               .join('')
               .slice(0, 100);
             expect(text.length).toBeGreaterThan(0);
@@ -197,10 +197,10 @@ describe('AbortController and Process Lifecycle (E2E)', () => {
         for await (const message of q) {
           if (isSDKAssistantMessage(message)) {
             const textBlocks = message.message.content.filter(
-              (block): block is TextBlock => block.type === 'text',
+              (block: ContentBlock): block is TextBlock => block.type === 'text',
             );
             const text = textBlocks
-              .map((b) => b.text)
+              .map((b: TextBlock) => b.text)
               .join('')
               .slice(0, 50);
             expect(text.length).toBeGreaterThan(0);
@@ -374,7 +374,7 @@ describe('AbortController and Process Lifecycle (E2E)', () => {
           cwd: testDir,
           permissionMode: 'default',
           coreTools: ['read_file', 'write_file'],
-          canUseTool: async (toolName, input) => {
+          canUseTool: async (toolName: string, input: Record<string, unknown>) => {
             inputStreamDoneResolve();
             await new Promise((resolve) => setTimeout(resolve, 1000));
             canUseToolCalledResolve();
@@ -427,7 +427,8 @@ describe('AbortController and Process Lifecycle (E2E)', () => {
         const q = query({
           prompt: 'Hello world',
           options: {
-            pathToBorosExecutable: '/nonexistent/path/to/cli',
+            ...SHARED_TEST_OPTIONS,
+            pathToQwenExecutable: '/nonexistent/path/to/cli',
             debug: false,
           },
         });
@@ -500,10 +501,10 @@ describe('AbortController and Process Lifecycle (E2E)', () => {
         for await (const message of q) {
           if (isSDKAssistantMessage(message)) {
             const textBlocks = message.message.content.filter(
-              (block): block is TextBlock => block.type === 'text',
+              (block: ContentBlock): block is TextBlock => block.type === 'text',
             );
             const text = textBlocks
-              .map((b) => b.text)
+              .map((b: TextBlock) => b.text)
               .join('')
               .slice(0, 50);
             expect(text.length).toBeGreaterThan(0);

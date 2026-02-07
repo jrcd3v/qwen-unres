@@ -23,7 +23,9 @@ const meta: Meta<typeof CopyButton> = {
     ((Story) => (
       <PlatformProvider
         value={{
-          type: 'web',
+          platform: 'web',
+          postMessage: () => {},
+          onMessage: () => () => {},
           copyToClipboard: async (text) => {
             await navigator.clipboard.writeText(text);
           },

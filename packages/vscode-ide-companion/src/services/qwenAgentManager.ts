@@ -300,8 +300,8 @@ export class QwenAgentManager {
       // Check if our current session exists in the session list
       const sessionExists = sessions.some(
         (session: Record<string, unknown>) =>
-          session.id === currentSessionId ||
-          session.sessionId === currentSessionId,
+          (session['id'] as string | undefined) === currentSessionId ||
+          (session['sessionId'] as string | undefined) === currentSessionId,
       );
 
       return sessionExists;
@@ -353,16 +353,16 @@ export class QwenAgentManager {
       );
       if (items.length > 0) {
         const sessions = items.map((item) => ({
-          id: item.sessionId || item.id,
-          sessionId: item.sessionId || item.id,
-          title: item.title || item.name || item.prompt || 'Untitled Session',
-          name: item.title || item.name || item.prompt || 'Untitled Session',
-          startTime: item.startTime,
-          lastUpdated: item.mtime || item.lastUpdated,
-          messageCount: item.messageCount || 0,
-          projectHash: item.projectHash,
-          filePath: item.filePath,
-          cwd: item.cwd,
+          id: item['sessionId'] || item['id'],
+          sessionId: item['sessionId'] || item['id'],
+          title: item['title'] || item['name'] || item['prompt'] || 'Untitled Session',
+          name: item['title'] || item['name'] || item['prompt'] || 'Untitled Session',
+          startTime: item['startTime'],
+          lastUpdated: item['mtime'] || item['lastUpdated'],
+          messageCount: item['messageCount'] || 0,
+          projectHash: item['projectHash'],
+          filePath: item['filePath'],
+          cwd: item['cwd'],
         }));
 
         console.log(
@@ -451,16 +451,16 @@ export class QwenAgentManager {
       }
 
       const mapped = items.map((item) => ({
-        id: item.sessionId || item.id,
-        sessionId: item.sessionId || item.id,
-        title: item.title || item.name || item.prompt || 'Untitled Session',
-        name: item.title || item.name || item.prompt || 'Untitled Session',
-        startTime: item.startTime,
-        lastUpdated: item.mtime || item.lastUpdated,
-        messageCount: item.messageCount || 0,
-        projectHash: item.projectHash,
-        filePath: item.filePath,
-        cwd: item.cwd,
+        id: item['sessionId'] || item['id'],
+        sessionId: item['sessionId'] || item['id'],
+        title: item['title'] || item['name'] || item['prompt'] || 'Untitled Session',
+        name: item['title'] || item['name'] || item['prompt'] || 'Untitled Session',
+        startTime: item['startTime'],
+        lastUpdated: item['mtime'] || item['lastUpdated'],
+        messageCount: item['messageCount'] || 0,
+        projectHash: item['projectHash'],
+        filePath: item['filePath'],
+        cwd: item['cwd'],
       }));
 
       const nextCursor: number | undefined =
@@ -529,7 +529,7 @@ export class QwenAgentManager {
       try {
         const list = await this.getSessionList();
         const item = list.find(
-          (s) => s.sessionId === sessionId || s.id === sessionId,
+          (s) => s['sessionId'] === sessionId || s['id'] === sessionId,
         );
         console.log(
           '[QwenAgentManager] Session list item for filePath lookup:',
@@ -539,9 +539,9 @@ export class QwenAgentManager {
           typeof item === 'object' &&
           item !== null &&
           'filePath' in item &&
-          typeof item.filePath === 'string'
+          typeof item['filePath'] === 'string'
         ) {
-          const messages = await this.readJsonlMessages(item.filePath);
+          const messages = await this.readJsonlMessages(item['filePath']);
           // Even if messages array is empty, we should return it rather than falling back
           // This ensures we don't accidentally show messages from a different session format
           return messages;
@@ -622,8 +622,8 @@ export class QwenAgentManager {
       const isJsonlRecord = (x: unknown): x is JsonlRecord =>
         typeof x === 'object' &&
         x !== null &&
-        typeof (x as Record<string, unknown>).type === 'string' &&
-        typeof (x as Record<string, unknown>).timestamp === 'string';
+        typeof (x as Record<string, unknown>)['type'] === 'string' &&
+        typeof (x as Record<string, unknown>)['timestamp'] === 'string';
 
       const allRecords = records
         .filter(isJsonlRecord)
@@ -746,7 +746,7 @@ export class QwenAgentManager {
               .map(
                 (entry: Record<string, unknown>, index: number) =>
                   `${index + 1}. ${
-                    entry.description || entry.title || 'Unnamed step'
+                    entry['description'] || entry['title'] || 'Unnamed step'
                   }`,
               )
               .join('\n');
@@ -783,48 +783,48 @@ export class QwenAgentManager {
       const typedRecord = record as Record<string, unknown>;
 
       // If the tool call has a result or output, include it
-      if ('toolCallResult' in typedRecord && typedRecord.toolCallResult) {
-        return `Tool result: ${this.formatValue(typedRecord.toolCallResult)}`;
+      if ('toolCallResult' in typedRecord && typedRecord['toolCallResult']) {
+        return `Tool result: ${this.formatValue(typedRecord['toolCallResult'])}`;
       }
 
       // If the tool call has content, include it
-      if ('content' in typedRecord && typedRecord.content) {
-        return this.formatValue(typedRecord.content);
+      if ('content' in typedRecord && typedRecord['content']) {
+        return this.formatValue(typedRecord['content']);
       }
 
       // If the tool call has a title or name, include it
       if (
-        ('title' in typedRecord && typedRecord.title) ||
-        ('name' in typedRecord && typedRecord.name)
+        ('title' in typedRecord && typedRecord['title']) ||
+        ('name' in typedRecord && typedRecord['name'])
       ) {
-        return `Tool: ${typedRecord.title || typedRecord.name}`;
+        return `Tool: ${typedRecord['title'] || typedRecord['name']}`;
       }
 
       // Handle tool_call records with more details
       if (
-        typedRecord.type === 'tool_call' &&
+        typedRecord['type'] === 'tool_call' &&
         'toolCall' in typedRecord &&
-        typedRecord.toolCall
+        typedRecord['toolCall']
       ) {
-        const toolCall = typedRecord.toolCall as Record<string, unknown>;
+        const toolCall = typedRecord['toolCall'] as Record<string, unknown>;
         if (
-          ('title' in toolCall && toolCall.title) ||
-          ('name' in toolCall && toolCall.name)
+          ('title' in toolCall && toolCall['title']) ||
+          ('name' in toolCall && toolCall['name'])
         ) {
-          return `Tool call: ${toolCall.title || toolCall.name}`;
+          return `Tool call: ${toolCall['title'] || toolCall['name']}`;
         }
-        if ('rawInput' in toolCall && toolCall.rawInput) {
-          return `Tool input: ${this.formatValue(toolCall.rawInput)}`;
+        if ('rawInput' in toolCall && toolCall['rawInput']) {
+          return `Tool input: ${this.formatValue(toolCall['rawInput'])}`;
         }
       }
 
       // Handle tool_call_update records with status
-      if (typedRecord.type === 'tool_call_update') {
+      if (typedRecord['type'] === 'tool_call_update') {
         const status =
-          ('status' in typedRecord && typedRecord.status) || 'unknown';
+          ('status' in typedRecord && typedRecord['status']) || 'unknown';
         const title =
-          ('title' in typedRecord && typedRecord.title) ||
-          ('name' in typedRecord && typedRecord.name) ||
+          ('title' in typedRecord && typedRecord['title']) ||
+          ('name' in typedRecord && typedRecord['name']) ||
           'Unknown tool';
         return `Tool ${status}: ${title}`;
       }
@@ -864,7 +864,7 @@ export class QwenAgentManager {
       // Cast to a more specific type for easier handling
       const typedMessage = message as Record<string, unknown>;
 
-      const parts = Array.isArray(typedMessage.parts) ? typedMessage.parts : [];
+      const parts = Array.isArray(typedMessage['parts']) ? typedMessage['parts'] : [];
       const texts: string[] = [];
       for (const p of parts) {
         // Type guard for part
@@ -873,10 +873,10 @@ export class QwenAgentManager {
         }
 
         const typedPart = p as Record<string, unknown>;
-        if (typeof typedPart.text === 'string') {
-          texts.push(typedPart.text);
-        } else if (typeof typedPart.data === 'string') {
-          texts.push(typedPart.data);
+        if (typeof typedPart['text'] === 'string') {
+          texts.push(typedPart['text']);
+        } else if (typeof typedPart['data'] === 'string') {
+          texts.push(typedPart['data']);
         }
       }
       return texts.join('\n');
@@ -1208,7 +1208,7 @@ export class QwenAgentManager {
         } else {
           console.warn(
             '[QwenAgentManager] No availableModels found in session/new response. Raw models field:',
-            (newSessionResult as Record<string, unknown>)?.models,
+            (newSessionResult as Record<string, unknown>)?.['models'],
           );
         }
 

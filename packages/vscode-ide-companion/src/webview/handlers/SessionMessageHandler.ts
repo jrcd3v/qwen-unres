@@ -51,8 +51,8 @@ export class SessionMessageHandler extends BaseMessageHandler {
     switch (message.type) {
       case 'sendMessage':
         await this.handleSendMessage(
-          (data?.text as string) || '',
-          data?.context as
+          (data?.['text'] as string) || '',
+          data?.['context'] as
             | Array<{
                 type: string;
                 name: string;
@@ -61,7 +61,7 @@ export class SessionMessageHandler extends BaseMessageHandler {
                 endLine?: number;
               }>
             | undefined,
-          data?.fileContext as
+          data?.['fileContext'] as
             | {
                 fileName: string;
                 filePath: string;
@@ -77,22 +77,22 @@ export class SessionMessageHandler extends BaseMessageHandler {
         break;
 
       case 'switchQwenSession':
-        await this.handleSwitchQwenSession((data?.sessionId as string) || '');
+        await this.handleSwitchQwenSession((data?.['sessionId'] as string) || '');
         break;
 
       case 'getQwenSessions':
         await this.handleGetQwenSessions(
-          (data?.cursor as number | undefined) ?? undefined,
-          (data?.size as number | undefined) ?? undefined,
+          (data?.['cursor'] as number | undefined) ?? undefined,
+          (data?.['size'] as number | undefined) ?? undefined,
         );
         break;
 
       case 'saveSession':
-        await this.handleSaveSession((data?.tag as string) || '');
+        await this.handleSaveSession((data?.['tag'] as string) || '');
         break;
 
       case 'resumeSession':
-        await this.handleResumeSession((data?.sessionId as string) || '');
+        await this.handleResumeSession((data?.['sessionId'] as string) || '');
         break;
 
       case 'openNewChatTab':
@@ -610,7 +610,7 @@ export class SessionMessageHandler extends BaseMessageHandler {
 
         const loadResponse = await this.agentManager.loadSessionViaAcp(
           sessionId,
-          (sessionDetails?.cwd as string | undefined) || undefined,
+          (sessionDetails?.['cwd'] as string | undefined) || undefined,
         );
         console.log(
           '[SessionMessageHandler] session/load succeeded (per ACP spec result is null; actual history comes via session/update):',

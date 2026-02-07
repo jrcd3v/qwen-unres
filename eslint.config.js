@@ -63,7 +63,7 @@ export default tseslint.config(
   },
   {
     // General overrides and rules for the project (TS/TSX files)
-    files: ['packages/*/src/**/*.{ts,tsx}'], // Target only TS/TSX in the cli package
+    files: ['packages/*/src/**/*.{ts,tsx}'],
     plugins: {
       import: importPlugin,
     },
@@ -124,7 +124,7 @@ export default tseslint.config(
             '**/generated/**',
             './styles/tailwind.css',
             './styles/App.css',
-            './styles/style.css'
+            './styles/style.css',
           ],
         },
       ],
@@ -169,6 +169,11 @@ export default tseslint.config(
       ...vitest.configs.recommended.rules,
       'vitest/expect-expect': 'off',
       'vitest/no-commented-out-tests': 'off',
+      // Relax strict rules in tests to reduce noise and allow conditional assertions
+      'vitest/no-conditional-expect': 'off',
+      'vitest/no-standalone-expect': 'off',
+      'vitest/no-mocks-import': 'off',
+      '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-unused-vars': [
         'error',
         {
@@ -179,17 +184,29 @@ export default tseslint.config(
       ],
     },
   },
-  // extra settings for scripts that we run directly with node
+  // extra settings for scripts and config files that we run directly with node
   {
-    files: ['./scripts/**/*.js', 'esbuild.config.js', 'packages/*/scripts/**/*.js'],
+    files: [
+      './scripts/**/*.js',
+      'esbuild.config.js',
+      'packages/*/scripts/**/*.js',
+      '**/tailwind.config.{js,cjs,mjs}',
+      '**/postcss.config.{js,cjs,mjs}',
+      '**/vite.config.{ts,js,mjs,cjs}',
+    ],
     languageOptions: {
       globals: {
         ...globals.node,
         process: 'readonly',
         console: 'readonly',
+        module: 'readonly',
+        require: 'readonly',
+        __dirname: 'readonly',
       },
     },
     rules: {
+      '@typescript-eslint/no-require-imports': 'off',
+      'no-undef': 'off',
       '@typescript-eslint/no-unused-vars': [
         'error',
         {
@@ -277,9 +294,27 @@ export default tseslint.config(
       'react/prop-types': 'off',
     },
   },
-  // Prettier config must be last
+  // Relax lint rules for Storybook stories in webui
+  {
+    files: ['packages/webui/src/**/*.stories.{ts,tsx}'],
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        { argsIgnorePattern: '^_', varsIgnorePattern: '^(?:_|Decorator|renderStoryDecorator)$' },
+      ],
+    },
+  },
+  // Relax for Vite configs in packages
+  {
+    files: ['packages/**/vite.config.{ts,js,mjs,cjs}'],
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'off',
+    },
+  },
+  // Prettier config must be last before directory-specific extras
   prettierConfig,
-  // extra settings for scripts that we run directly with node
+  // extra settings for integration tests run with node
   {
     files: ['./integration-tests/**/*.{js,ts,tsx}'],
     languageOptions: {
@@ -290,6 +325,10 @@ export default tseslint.config(
       },
     },
     rules: {
+      '@typescript-eslint/no-explicit-any': 'off',
+      'vitest/no-conditional-expect': 'off',
+      'vitest/no-standalone-expect': 'off',
+      'vitest/no-mocks-import': 'off',
       '@typescript-eslint/no-unused-vars': [
         'error',
         {
