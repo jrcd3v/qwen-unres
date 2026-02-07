@@ -181,7 +181,7 @@ export class TestRig {
         otlpEndpoint: '',
         outfile: telemetryPath,
       },
-      sandbox: env.GEMINI_SANDBOX !== 'false' ? env.GEMINI_SANDBOX : false,
+      sandbox: env['GEMINI_SANDBOX'] !== 'false' ? env['GEMINI_SANDBOX'] : false,
       ...options.settings, // Allow tests to override/add settings
     };
     writeFileSync(
@@ -215,7 +215,7 @@ export class TestRig {
     initialArgs: string[];
   } {
     const isNpmReleaseTest =
-      process.env.INTEGRATION_TEST_USE_INSTALLED_GEMINI === 'true';
+      process.env['INTEGRATION_TEST_USE_INSTALLED_GEMINI'] === 'true';
     const command = isNpmReleaseTest ? 'boros' : 'node';
     const initialArgs = isNpmReleaseTest
       ? ['--no-chat-recording', ...extraInitialArgs]
@@ -397,14 +397,14 @@ export class TestRig {
 
     child.stdout!.on('data', (data: Buffer) => {
       stdout += data;
-      if (env.KEEP_OUTPUT === 'true' || env.VERBOSE === 'true') {
+      if (env['KEEP_OUTPUT'] === 'true' || env['VERBOSE'] === 'true') {
         process.stdout.write(data);
       }
     });
 
     child.stderr!.on('data', (data: Buffer) => {
       stderr += data;
-      if (env.KEEP_OUTPUT === 'true' || env.VERBOSE === 'true') {
+      if (env['KEEP_OUTPUT'] === 'true' || env['VERBOSE'] === 'true') {
         process.stderr.write(data);
       }
     });
@@ -716,7 +716,7 @@ export class TestRig {
         logs.push(logData);
       } catch (e) {
         // Skip objects that aren't valid JSON
-        if (env.VERBOSE === 'true') {
+        if (env['VERBOSE'] === 'true') {
           console.error('Failed to parse telemetry object:', e);
         }
       }
@@ -770,13 +770,16 @@ export class TestRig {
         logData.attributes &&
         logData.attributes['event.name'] === 'boros-code.tool_call'
       ) {
-        const toolName = logData.attributes.function_name;
+        const toolName = logData.attributes.function_name || '';
+        const functionArgs = logData.attributes.function_args || '';
+        const success = logData.attributes.success ?? false;
+        const duration_ms = logData.attributes.duration_ms ?? 0;
         logs.push({
           toolRequest: {
             name: toolName,
-            args: logData.attributes.function_args,
-            success: logData.attributes.success,
-            duration_ms: logData.attributes.duration_ms,
+            args: functionArgs,
+            success: success,
+            duration_ms: duration_ms,
           },
         });
       }
@@ -792,7 +795,9 @@ export class TestRig {
         logData.attributes &&
         logData.attributes['event.name'] === 'boros-code.api_request',
     );
-    return apiRequests.pop() || null;
+    const lastRequest = apiRequests.pop();
+    if (!lastRequest) return null;
+    return lastRequest as unknown as Record<string, unknown>;
   }
 
   readMetric(metricName: string): Record<string, unknown> | null {
@@ -844,7 +849,7 @@ export class TestRig {
 
     ptyProcess.onData((data) => {
       this._interactiveOutput += data;
-      if (env.KEEP_OUTPUT === 'true' || env.VERBOSE === 'true') {
+      if (env['KEEP_OUTPUT'] === 'true' || env['VERBOSE'] === 'true') {
         process.stdout.write(data);
       }
     });
