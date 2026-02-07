@@ -21,12 +21,12 @@ import type {
   ContentBlock,
   TextBlock,
   ToolUseBlock,
-} from '@jrcdev/boros-code/sdk';
+} from '@jrcdev/boros-code-sdk';
 import {
   isSDKAssistantMessage,
   isSDKSystemMessage,
   isSDKResultMessage,
-} from '@jrcdev/boros-code/sdk';
+} from '@jrcdev/boros-code-sdk';
 
 // ============================================================================
 // Core Test Helper Class
@@ -450,11 +450,11 @@ export function findToolUseBlocks(
   toolName?: string,
 ): ToolUseBlock[] {
   const toolUseBlocks = message.message.content.filter(
-    (block): block is ToolUseBlock => block.type === 'tool_use',
+    (block: ContentBlock): block is ToolUseBlock => block.type === 'tool_use',
   );
 
   if (toolName) {
-    return toolUseBlocks.filter((block) => block.name === toolName);
+    return toolUseBlocks.filter((block: ToolUseBlock) => block.name === toolName);
   }
 
   return toolUseBlocks;
@@ -998,7 +998,7 @@ export function createSharedTestOptions(
   }
 
   return {
-    pathToBorosExecutable: TEST_CLI_PATH,
+    pathToQwenExecutable: TEST_CLI_PATH,
     ...overrides,
   };
 }

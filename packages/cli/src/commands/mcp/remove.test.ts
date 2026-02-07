@@ -4,7 +4,11 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+/// <reference types="vitest/globals" />
+
+import type { Argv } from 'yargs';
 import { vi, describe, it, expect, beforeEach } from 'vitest';
+import type { Mock } from 'vitest';
 import yargs from 'yargs';
 import { loadSettings, SettingScope } from '../../config/settings.js';
 import { removeCommand } from './remove.js';
@@ -29,8 +33,8 @@ vi.mock('../../config/settings.js', async () => {
 const mockedLoadSettings = loadSettings as vi.Mock;
 
 describe('mcp remove command', () => {
-  let parser: yargs.Argv;
-  let mockSetValue: vi.Mock;
+  let parser: Argv;
+    let mockSetValue: Mock;
   let mockSettings: Record<string, unknown>;
 
   beforeEach(() => {

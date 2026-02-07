@@ -54,7 +54,7 @@ export const groupSessionsByDate = (
 
   sessions.forEach((session) => {
     const timestamp =
-      (session.lastUpdated as string) || (session.startTime as string) || '';
+      (session['lastUpdated'] as string) || (session['startTime'] as string) || '';
     if (!timestamp) {
       groups['Older'].push(session);
       return;

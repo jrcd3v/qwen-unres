@@ -29,7 +29,7 @@ export default defineConfig({
   resolve: {
     alias: {
       // Use built SDK bundle for e2e tests
-      '@jrcdev/boros-code/sdk': resolve(
+      '@jrcdev/boros-code-sdk': resolve(
         __dirname,
         '../packages/sdk-typescript/dist/index.mjs',
       ),

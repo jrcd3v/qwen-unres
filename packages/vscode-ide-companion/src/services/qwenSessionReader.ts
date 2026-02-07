@@ -248,28 +248,28 @@ export class QwenSessionReader {
           continue;
         }
 
-        if (!sessionId && typeof obj.sessionId === 'string') {
-          sessionId = obj.sessionId;
+        if (!sessionId && typeof obj['sessionId'] === 'string') {
+          sessionId = obj['sessionId'];
         }
-        if (!startTime && typeof obj.timestamp === 'string') {
-          startTime = obj.timestamp;
+        if (!startTime && typeof obj['timestamp'] === 'string') {
+          startTime = obj['timestamp'];
         }
-        if (!cwd && typeof obj.cwd === 'string') {
-          cwd = obj.cwd;
+        if (!cwd && typeof obj['cwd'] === 'string') {
+          cwd = obj['cwd'];
         }
 
-        const type = typeof obj.type === 'string' ? obj.type : '';
+        const type = typeof obj['type'] === 'string' ? obj['type'] : '';
         if (type === 'user' || type === 'assistant') {
-          const uuid = typeof obj.uuid === 'string' ? obj.uuid : undefined;
+          const uuid = typeof obj['uuid'] === 'string' ? obj['uuid'] : undefined;
           if (uuid) {
             seenUuids.add(uuid);
           }
 
-          const text = this.contentToText(obj.message);
+          const text = this.contentToText(obj['message']);
           if (includeMessages) {
             messages.push({
               id: uuid || `${messages.length}`,
-              timestamp: typeof obj.timestamp === 'string' ? obj.timestamp : '',
+              timestamp: typeof obj['timestamp'] === 'string' ? obj['timestamp'] : '',
               type: type === 'user' ? 'user' : 'qwen',
               content: text,
             });
@@ -327,10 +327,10 @@ export class QwenSessionReader {
           continue;
         }
         const p = part as Record<string, unknown>;
-        if (typeof p.text === 'string') {
-          texts.push(p.text);
-        } else if (typeof p.data === 'string') {
-          texts.push(p.data);
+        if (typeof p['text'] === 'string') {
+          texts.push(p['text']);
+        } else if (typeof p['data'] === 'string') {
+          texts.push(p['data']);
         }
       }
       return texts.join('\n');

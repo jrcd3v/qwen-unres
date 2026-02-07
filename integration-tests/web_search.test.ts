@@ -47,7 +47,7 @@ describe('web_search', () => {
     }
 
     if (providers.length > 0) {
-      webSearchSettings.webSearch = {
+      (webSearchSettings as any)['webSearch'] = {
         provider: providers,
         default: providers[0]?.type,
       };

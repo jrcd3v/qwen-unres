@@ -67,7 +67,7 @@ const getCommandText = (
   rawInput?: unknown,
 ): string => {
   if (variant === 'execute' && rawInput && typeof rawInput === 'object') {
-    const description = (rawInput as Record<string, unknown>).description;
+    const description = (rawInput as Record<string, unknown>)['description'];
     const describedTitle = safeTitle(description);
     if (describedTitle) {
       return describedTitle;
@@ -85,7 +85,7 @@ const getInputCommand = (
 ): string => {
   if (rawInput && typeof rawInput === 'object') {
     const inputObj = rawInput as Record<string, unknown>;
-    return (inputObj.command as string | undefined) || commandText;
+    return (inputObj['command'] as string | undefined) || commandText;
   }
   if (typeof rawInput === 'string') {
     return rawInput;

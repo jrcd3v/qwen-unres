@@ -9,6 +9,7 @@ import open from 'open';
 import { bugCommand } from './bugCommand.js';
 import { createMockCommandContext } from '../../test-utils/mockCommandContext.js';
 import { GIT_COMMIT_INFO } from '../../generated/git-commit.js';
+import { formatGitCommitInfo } from '../../utils/systemInfo.js';
 import { AuthType } from '@jrcdev/boros-code-core';
 import * as systemInfoUtils from '../../utils/systemInfo.js';
 
@@ -31,10 +32,7 @@ describe('bugCommand', () => {
       ideClient: 'VSCode',
       sessionId: 'test-session-id',
       memoryUsage: '100 MB',
-      gitCommit:
-        GIT_COMMIT_INFO && !['N/A'].includes(GIT_COMMIT_INFO)
-          ? GIT_COMMIT_INFO
-          : undefined,
+      gitCommit: formatGitCommitInfo(GIT_COMMIT_INFO),
     });
     vi.stubEnv('SANDBOX', 'qwen-test');
   });
@@ -57,8 +55,8 @@ describe('bugCommand', () => {
     await bugCommand.action(mockContext, 'A test bug');
 
     const qwenCodeLine =
-      GIT_COMMIT_INFO && !['N/A'].includes(GIT_COMMIT_INFO)
-        ? `Qwen Code: 0.1.0 (${GIT_COMMIT_INFO})`
+      formatGitCommitInfo(GIT_COMMIT_INFO)
+        ? `Qwen Code: 0.1.0 (${formatGitCommitInfo(GIT_COMMIT_INFO)})`
         : 'Qwen Code: 0.1.0';
     const expectedInfo = `${qwenCodeLine}
 Runtime: Node.js v20.0.0 / npm 10.0.0
@@ -91,8 +89,8 @@ Memory Usage: 100 MB`;
     await bugCommand.action(mockContext, 'A custom bug');
 
     const qwenCodeLine =
-      GIT_COMMIT_INFO && !['N/A'].includes(GIT_COMMIT_INFO)
-        ? `Qwen Code: 0.1.0 (${GIT_COMMIT_INFO})`
+      formatGitCommitInfo(GIT_COMMIT_INFO)
+        ? `Qwen Code: 0.1.0 (${formatGitCommitInfo(GIT_COMMIT_INFO)})`
         : 'Qwen Code: 0.1.0';
     const expectedInfo = `${qwenCodeLine}
 Runtime: Node.js v20.0.0 / npm 10.0.0
@@ -125,10 +123,7 @@ Memory Usage: 100 MB`;
       sessionId: 'test-session-id',
       memoryUsage: '100 MB',
       baseUrl: 'https://api.openai.com/v1',
-      gitCommit:
-        GIT_COMMIT_INFO && !['N/A'].includes(GIT_COMMIT_INFO)
-          ? GIT_COMMIT_INFO
-          : undefined,
+      gitCommit: formatGitCommitInfo(GIT_COMMIT_INFO),
     });
 
     const mockContext = createMockCommandContext({
@@ -143,8 +138,8 @@ Memory Usage: 100 MB`;
     await bugCommand.action(mockContext, 'OpenAI bug');
 
     const qwenCodeLine =
-      GIT_COMMIT_INFO && !['N/A'].includes(GIT_COMMIT_INFO)
-        ? `Qwen Code: 0.1.0 (${GIT_COMMIT_INFO})`
+      formatGitCommitInfo(GIT_COMMIT_INFO)
+        ? `Qwen Code: 0.1.0 (${formatGitCommitInfo(GIT_COMMIT_INFO)})`
         : 'Qwen Code: 0.1.0';
     const expectedInfo = `${qwenCodeLine}
 Runtime: Node.js v20.0.0 / npm 10.0.0

@@ -21,7 +21,7 @@ import {
   type SDKMessage,
   type ControlMessage,
   type ToolUseBlock,
-} from '@jrcdev/boros-code/sdk';
+} from '@jrcdev/boros-code-sdk';
 import {
   SDKTestHelper,
   createSharedTestOptions,

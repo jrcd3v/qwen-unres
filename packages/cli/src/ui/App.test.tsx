@@ -4,9 +4,12 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+/// <reference types="vitest/globals" />
+
 import { describe, it, expect, vi } from 'vitest';
 import { render } from 'ink-testing-library';
 import { Text, useIsScreenReaderEnabled } from 'ink';
+import type { Mock } from 'vitest';
 import { App } from './App.js';
 import { UIStateContext, type UIState } from './contexts/UIStateContext.js';
 import { StreamingState } from './types.js';
@@ -135,7 +138,7 @@ describe('App', () => {
   });
 
   it('should render ScreenReaderAppLayout when screen reader is enabled', () => {
-    (useIsScreenReaderEnabled as vi.Mock).mockReturnValue(true);
+    (useIsScreenReaderEnabled as Mock).mockReturnValue(true);
 
     const { lastFrame } = render(
       <UIStateContext.Provider value={mockUIState as UIState}>
@@ -149,7 +152,7 @@ describe('App', () => {
   });
 
   it('should render DefaultAppLayout when screen reader is not enabled', () => {
-    (useIsScreenReaderEnabled as vi.Mock).mockReturnValue(false);
+    (useIsScreenReaderEnabled as Mock).mockReturnValue(false);
 
     const { lastFrame } = render(
       <UIStateContext.Provider value={mockUIState as UIState}>

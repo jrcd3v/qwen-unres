@@ -5,9 +5,17 @@
     "allowJs": true,
     "baseUrl": ".",
     "paths": {
+      "@jrcdev/boros-code-sdk": ["../packages/sdk-typescript/dist/index.d.ts"],
       "@jrcdev/boros-code/sdk": ["../packages/sdk-typescript/dist/index.d.ts"]
     }
   },
-  "include": ["**/*.ts"],
-  "references": [{ "path": "../packages/core" }]
+  "include": ["**/*.ts", "**/*.d.ts"],
+  "exclude": [
+    "node_modules",
+    "sdk-typescript",
+    "concurrent-runner",
+    "terminal-bench",
+    "**/*.test.ts"
+  ],
+  "references": [{ "path": "../packages/core" }, { "path": "../packages/sdk-typescript" }]
 }

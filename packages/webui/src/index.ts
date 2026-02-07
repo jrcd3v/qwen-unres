@@ -19,79 +19,79 @@ export {
   PlatformContext,
   PlatformProvider,
   usePlatform,
-} from './context/PlatformContext';
+} from './context/PlatformContext.js';
 export type {
   PlatformContextValue,
   PlatformProviderProps,
   PlatformType,
-} from './context/PlatformContext';
+} from './context/PlatformContext.js';
 
 // Layout components
-export { default as Container } from './components/layout/Container';
-export { default as Header } from './components/layout/Header';
-export { default as Sidebar } from './components/layout/Sidebar';
-export { default as Main } from './components/layout/Main';
-export { default as Footer } from './components/layout/Footer';
-export { FileLink } from './components/layout/FileLink';
-export type { FileLinkProps } from './components/layout/FileLink';
-export { ChatHeader } from './components/layout/ChatHeader';
-export type { ChatHeaderProps } from './components/layout/ChatHeader';
-export { ContextIndicator } from './components/layout/ContextIndicator';
+export { default as Container } from './components/layout/Container.js';
+export { default as Header } from './components/layout/Header.js';
+export { default as Sidebar } from './components/layout/Sidebar.js';
+export { default as Main } from './components/layout/Main.js';
+export { default as Footer } from './components/layout/Footer.js';
+export { FileLink } from './components/layout/FileLink.js';
+export type { FileLinkProps } from './components/layout/FileLink.js';
+export { ChatHeader } from './components/layout/ChatHeader.js';
+export type { ChatHeaderProps } from './components/layout/ChatHeader.js';
+export { ContextIndicator } from './components/layout/ContextIndicator.js';
 export type {
   ContextIndicatorProps,
   ContextUsage,
-} from './components/layout/ContextIndicator';
-export { CompletionMenu } from './components/layout/CompletionMenu';
-export type { CompletionMenuProps } from './components/layout/CompletionMenu';
-export { SessionSelector } from './components/layout/SessionSelector';
-export type { SessionSelectorProps } from './components/layout/SessionSelector';
-export { EmptyState } from './components/layout/EmptyState';
-export type { EmptyStateProps } from './components/layout/EmptyState';
-export { InputForm, getEditModeIcon } from './components/layout/InputForm';
+} from './components/layout/ContextIndicator.js';
+export { CompletionMenu } from './components/layout/CompletionMenu.js';
+export type { CompletionMenuProps } from './components/layout/CompletionMenu.js';
+export { SessionSelector } from './components/layout/SessionSelector.js';
+export type { SessionSelectorProps } from './components/layout/SessionSelector.js';
+export { EmptyState } from './components/layout/EmptyState.js';
+export type { EmptyStateProps } from './components/layout/EmptyState.js';
+export { InputForm, getEditModeIcon } from './components/layout/InputForm.js';
 export type {
   InputFormProps,
   EditModeInfo,
   EditModeIconType,
-} from './components/layout/InputForm';
-export { Onboarding } from './components/layout/Onboarding';
-export type { OnboardingProps } from './components/layout/Onboarding';
+} from './components/layout/InputForm.js';
+export { Onboarding } from './components/layout/Onboarding.js';
+export type { OnboardingProps } from './components/layout/Onboarding.js';
 
 // Message components
-export { default as Message } from './components/messages/Message';
-export { default as MessageInput } from './components/messages/MessageInput';
-export { default as MessageList } from './components/messages/MessageList';
-export { WaitingMessage } from './components/messages/Waiting/WaitingMessage';
-export { InterruptedMessage } from './components/messages/Waiting/InterruptedMessage';
-export { MarkdownRenderer } from './components/messages/MarkdownRenderer/MarkdownRenderer';
-export type { MarkdownRendererProps } from './components/messages/MarkdownRenderer/MarkdownRenderer';
-export { MessageContent } from './components/messages/MessageContent';
-export type { MessageContentProps } from './components/messages/MessageContent';
-export { UserMessage } from './components/messages/UserMessage';
+export { default as Message } from './components/messages/Message.js';
+export { default as MessageInput } from './components/messages/MessageInput.js';
+export { default as MessageList } from './components/messages/MessageList.js';
+export { WaitingMessage } from './components/messages/Waiting/WaitingMessage.js';
+export { InterruptedMessage } from './components/messages/Waiting/InterruptedMessage.js';
+export { MarkdownRenderer } from './components/messages/MarkdownRenderer/MarkdownRenderer.js';
+export type { MarkdownRendererProps } from './components/messages/MarkdownRenderer/MarkdownRenderer.js';
+export { MessageContent } from './components/messages/MessageContent.js';
+export type { MessageContentProps } from './components/messages/MessageContent.js';
+export { UserMessage } from './components/messages/UserMessage.js';
 export type {
   UserMessageProps,
   FileContext,
-} from './components/messages/UserMessage';
-export { ThinkingMessage } from './components/messages/ThinkingMessage';
-export type { ThinkingMessageProps } from './components/messages/ThinkingMessage';
-export { AssistantMessage } from './components/messages/Assistant/AssistantMessage';
+} from './components/messages/UserMessage.js';
+export { ThinkingMessage } from './components/messages/ThinkingMessage.js';
+export type { ThinkingMessageProps } from './components/messages/ThinkingMessage.js';
+export { AssistantMessage } from './components/messages/Assistant/AssistantMessage.js';
 export type {
   AssistantMessageProps,
   AssistantMessageStatus,
-} from './components/messages/Assistant/AssistantMessage';
+} from './components/messages/Assistant/AssistantMessage.js';
 export {
   CollapsibleFileContent,
   parseContentWithFileReferences,
-} from './components/messages/CollapsibleFileContent';
+} from './components/messages/CollapsibleFileContent.js';
 export type {
   CollapsibleFileContentProps,
   ContentSegment,
-} from './components/messages/CollapsibleFileContent';
+} from './components/messages/CollapsibleFileContent.js';
 
 // ChatViewer - standalone chat display component
 export {
   ChatViewer,
   default as ChatViewerDefault,
-} from './components/ChatViewer';
+} from './components/ChatViewer/index.js';
 export type {
   ChatViewerProps,
   ChatViewerHandle,
@@ -99,21 +99,21 @@ export type {
   ClaudeContentItem,
   MessagePart,
   ToolCallData as ChatViewerToolCallData,
-} from './components/ChatViewer';
+} from './components/ChatViewer/index.js';
 
 // UI Elements
-export { default as Button } from './components/ui/Button';
-export { default as Input } from './components/ui/Input';
-export { Tooltip } from './components/ui/Tooltip';
-export type { TooltipProps } from './components/ui/Tooltip';
+export { default as Button } from './components/ui/Button.js';
+export { default as Input } from './components/ui/Input.js';
+export { Tooltip } from './components/ui/Tooltip.js';
+export type { TooltipProps } from './components/ui/Tooltip.js';
 
 // Permission components
-export { PermissionDrawer } from './components/PermissionDrawer';
+export { PermissionDrawer } from './components/PermissionDrawer.js';
 export type {
   PermissionDrawerProps,
   PermissionOption,
   PermissionToolCall,
-} from './components/PermissionDrawer';
+} from './components/PermissionDrawer.js';
 
 // ToolCall shared components
 export {
@@ -145,7 +145,7 @@ export {
   ReadToolCall,
   WebFetchToolCall,
   CheckboxDisplay,
-} from './components/toolcalls';
+} from './components/toolcalls/index.js';
 export type {
   ToolCallContainerProps,
   ToolCallContent,
@@ -155,12 +155,12 @@ export type {
   ContainerStatus,
   PlanEntryStatus,
   CheckboxDisplayProps,
-} from './components/toolcalls';
+} from './components/toolcalls/index.js';
 
 // Icons
-export { default as Icon } from './components/icons/Icon';
-export { default as CloseIcon } from './components/icons/CloseIcon';
-export { default as SendIcon } from './components/icons/SendIcon';
+export { default as Icon } from './components/icons/Icon.js';
+export { default as CloseIcon } from './components/icons/CloseIcon.js';
+export { default as SendIcon } from './components/icons/SendIcon.js';
 
 // File Icons
 export {
@@ -168,7 +168,7 @@ export {
   FileListIcon,
   SaveDocumentIcon,
   FolderIcon,
-} from './components/icons/FileIcons';
+} from './components/icons/FileIcons.js';
 
 // Status Icons
 export {
@@ -179,7 +179,7 @@ export {
   UserIcon,
   SymbolIcon,
   SelectionIcon,
-} from './components/icons/StatusIcons';
+} from './components/icons/StatusIcons.js';
 
 // Navigation Icons
 export {
@@ -191,7 +191,7 @@ export {
   CloseSmallIcon,
   SearchIcon,
   RefreshIcon,
-} from './components/icons/NavigationIcons';
+} from './components/icons/NavigationIcons.js';
 
 // Edit Icons
 export {
@@ -204,31 +204,31 @@ export {
   LinkIcon,
   OpenDiffIcon,
   UndoIcon,
-} from './components/icons/EditIcons';
+} from './components/icons/EditIcons.js';
 
 // Special Icons
-export { ThinkingIcon, TerminalIcon } from './components/icons/SpecialIcons';
+export { ThinkingIcon, TerminalIcon } from './components/icons/SpecialIcons.js';
 
 // Action Icons
-export { StopIcon } from './components/icons/StopIcon';
+export { StopIcon } from './components/icons/StopIcon.js';
 
 // Hooks
-export { useTheme } from './hooks/useTheme';
-export { useLocalStorage } from './hooks/useLocalStorage';
+export { useTheme } from './hooks/useTheme.js';
+export { useLocalStorage } from './hooks/useLocalStorage.js';
 
 // Types
-export type { Theme } from './types/theme';
-export type { MessageProps } from './types/messages';
-export type { ChatMessage, MessageRole, PlanEntry } from './types/chat';
+export type { Theme } from './types/theme.js';
+export type { MessageProps } from './types/messages.js';
+export type { ChatMessage, MessageRole, PlanEntry } from './types/chat.js';
 // ToolCallStatus and ToolCallLocation are now exported from './components/toolcalls'
-export type { ToolCallContentItem, ToolCallUpdate } from './types/toolCall';
+export type { ToolCallContentItem, ToolCallUpdate } from './types/toolCall.js';
 // Re-export ToolCallStatus and ToolCallLocation for backward compatibility
-export type { ToolCallStatus, ToolCallLocation } from './components/toolcalls';
-export type { CompletionItem, CompletionItemType } from './types/completion';
+export type { ToolCallStatus, ToolCallLocation } from './components/toolcalls/index.js';
+export type { CompletionItem, CompletionItemType } from './types/completion.js';
 
 // Utils
-export { groupSessionsByDate, getTimeAgo } from './utils/sessionGrouping';
-export type { SessionGroup } from './utils/sessionGrouping';
+export { groupSessionsByDate, getTimeAgo } from './utils/sessionGrouping.js';
+export type { SessionGroup } from './utils/sessionGrouping.js';
 
 // Adapters - for normalizing different data formats
 export {
@@ -237,14 +237,14 @@ export {
   filterEmptyMessages,
   isToolCallData,
   isMessageData,
-} from './adapters';
+} from './adapters/index.js';
 export type {
   UnifiedMessage,
   UnifiedMessageType,
   JSONLMessage,
   ACPMessage,
   ACPMessageData,
-} from './adapters';
+} from './adapters/index.js';
 
 // VSCode Webview utilities
-export { default as WebviewContainer } from './components/WebviewContainer';
+export { default as WebviewContainer } from './components/WebviewContainer.js';

@@ -4,8 +4,10 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+/// <reference types="vitest/globals" />
+
+import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
 import { render } from 'ink-testing-library';
-import { describe, it, expect, vi, beforeAll, afterAll } from 'vitest';
 import { ModelStatsDisplay } from './ModelStatsDisplay.js';
 import * as SessionContext from '../contexts/SessionContext.js';
 import type { SessionMetrics } from '../contexts/SessionContext.js';
@@ -24,12 +26,14 @@ const useSessionStatsMock = vi.mocked(SessionContext.useSessionStats);
 const renderWithMockedStats = (metrics: SessionMetrics) => {
   useSessionStatsMock.mockReturnValue({
     stats: {
+      sessionId: 'test-session-id',
       sessionStartTime: new Date(),
       metrics,
       lastPromptTokenCount: 0,
       promptCount: 5,
     },
 
+    startNewSession: vi.fn(),
     getPromptCount: () => 5,
     startNewPrompt: vi.fn(),
   });
@@ -59,8 +63,12 @@ describe('<ModelStatsDisplay />', () => {
         totalSuccess: 0,
         totalFail: 0,
         totalDurationMs: 0,
-        totalDecisions: { accept: 0, reject: 0, modify: 0 },
+        totalDecisions: { accept: 0, reject: 0, modify: 0, auto_accept: 0 },
         byName: {},
+      },
+      files: {
+        totalLinesAdded: 0,
+        totalLinesRemoved: 0,
       },
     });
 
@@ -90,8 +98,12 @@ describe('<ModelStatsDisplay />', () => {
         totalSuccess: 0,
         totalFail: 0,
         totalDurationMs: 0,
-        totalDecisions: { accept: 0, reject: 0, modify: 0 },
+        totalDecisions: { accept: 0, reject: 0, modify: 0, auto_accept: 0 },
         byName: {},
+      },
+      files: {
+        totalLinesAdded: 0,
+        totalLinesRemoved: 0,
       },
     });
 
@@ -133,8 +145,12 @@ describe('<ModelStatsDisplay />', () => {
         totalSuccess: 0,
         totalFail: 0,
         totalDurationMs: 0,
-        totalDecisions: { accept: 0, reject: 0, modify: 0 },
+        totalDecisions: { accept: 0, reject: 0, modify: 0, auto_accept: 0 },
         byName: {},
+      },
+      files: {
+        totalLinesAdded: 0,
+        totalLinesRemoved: 0,
       },
     });
 
@@ -176,8 +192,12 @@ describe('<ModelStatsDisplay />', () => {
         totalSuccess: 0,
         totalFail: 0,
         totalDurationMs: 0,
-        totalDecisions: { accept: 0, reject: 0, modify: 0 },
+        totalDecisions: { accept: 0, reject: 0, modify: 0, auto_accept: 0 },
         byName: {},
+      },
+      files: {
+        totalLinesAdded: 0,
+        totalLinesRemoved: 0,
       },
     });
 
@@ -211,8 +231,12 @@ describe('<ModelStatsDisplay />', () => {
         totalSuccess: 0,
         totalFail: 0,
         totalDurationMs: 0,
-        totalDecisions: { accept: 0, reject: 0, modify: 0 },
+        totalDecisions: { accept: 0, reject: 0, modify: 0, auto_accept: 0 },
         byName: {},
+      },
+      files: {
+        totalLinesAdded: 0,
+        totalLinesRemoved: 0,
       },
     });
 
@@ -239,8 +263,12 @@ describe('<ModelStatsDisplay />', () => {
         totalSuccess: 0,
         totalFail: 0,
         totalDurationMs: 0,
-        totalDecisions: { accept: 0, reject: 0, modify: 0 },
+        totalDecisions: { accept: 0, reject: 0, modify: 0, auto_accept: 0 },
         byName: {},
+      },
+      files: {
+        totalLinesAdded: 0,
+        totalLinesRemoved: 0,
       },
     });
 

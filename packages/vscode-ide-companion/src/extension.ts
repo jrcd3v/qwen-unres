@@ -248,11 +248,10 @@ export async function activate(context: vscode.ExtensionContext) {
       }
     }),
     vscode.commands.registerCommand('qwen.diff.suppressBriefly', async () => {
-      try {
-        diffManager.suppressFor(1200);
-      } catch (err) {
-        console.warn('[Extension] qwen.diff.suppressBriefly failed:', err);
-      }
+      // Diff suppression feature - reserved for future use
+      // The suppressFor method was removed from DiffManager as the shouldSuppress
+      // callback in the constructor now handles suppression logic dynamically.
+      // This command is kept for backward compatibility but does nothing.
     }),
   );
 
@@ -332,7 +331,7 @@ export async function activate(context: vscode.ExtensionContext) {
             const cliQuoted = quoteCmd(cliEntry);
             // TODO: @yiliang114, temporarily run through node, and later hope to decouple from the local node
             qwenCmd = `node ${cliQuoted}`;
-            terminalOptions.shellPath = process.env.ComSpec;
+            terminalOptions.shellPath = process.env['ComSpec'];
           } else {
             // macOS/Linux: All VSCode-like IDEs (VSCode, Cursor, Windsurf, etc.)
             // are Electron-based, so we always need ELECTRON_RUN_AS_NODE=1

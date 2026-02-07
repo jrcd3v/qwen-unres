@@ -22,7 +22,7 @@ import {
   isSDKSystemMessage,
   type SDKMessage,
   type SDKSystemMessage,
-} from '@jrcdev/boros-code/sdk';
+} from '@jrcdev/boros-code-sdk';
 import {
   SDKTestHelper,
   extractText,
@@ -58,8 +58,8 @@ describe('SDK MCP Server Integration (E2E)', () => {
           a: z.number().describe('First number'),
           b: z.number().describe('Second number'),
         }).shape,
-        async (args) => ({
-          content: [{ type: 'text', text: String(args.a + args.b) }],
+        async (args: Record<string, unknown>) => ({
+          content: [{ type: 'text', text: String((args['a'] as number) + (args['b'] as number)) }],
         }),
       );
 
@@ -124,9 +124,9 @@ describe('SDK MCP Server Integration (E2E)', () => {
         {
           text: z.string().describe('The text to reverse'),
         },
-        async (args) => ({
+        async (args: Record<string, unknown>) => ({
           content: [
-            { type: 'text', text: args.text.split('').reverse().join('') },
+            { type: 'text', text: (args['text'] as string).split('').reverse().join('') },
           ],
         }),
       );
@@ -193,8 +193,8 @@ describe('SDK MCP Server Integration (E2E)', () => {
         'sdk_add',
         'Add two numbers',
         twoNumbersSchema,
-        async (args) => ({
-          content: [{ type: 'text', text: String(args.a + args.b) }],
+        async (args: Record<string, unknown>) => ({
+          content: [{ type: 'text', text: String((args['a'] as number) + (args['b'] as number)) }],
         }),
       );
 
@@ -202,8 +202,8 @@ describe('SDK MCP Server Integration (E2E)', () => {
         'sdk_multiply',
         'Multiply two numbers',
         twoNumbersSchema,
-        async (args) => ({
-          content: [{ type: 'text', text: String(args.a * args.b) }],
+        async (args: Record<string, unknown>) => ({
+          content: [{ type: 'text', text: String((args['a'] as number) * (args['b'] as number)) }],
         }),
       );
 
@@ -268,8 +268,8 @@ describe('SDK MCP Server Integration (E2E)', () => {
         {
           message: z.string().describe('Message to echo'),
         },
-        async (args) => ({
-          content: [{ type: 'text', text: args.message }],
+        async (args: Record<string, unknown>) => ({
+          content: [{ type: 'text', text: args['message'] as string }],
         }),
       );
 
@@ -308,7 +308,7 @@ describe('SDK MCP Server Integration (E2E)', () => {
 
         // Find our SDK MCP server
         const sdkServer = systemMessage!.mcp_servers?.find(
-          (server) => server.name === 'sdk-echo',
+          (server: unknown) => (server as Record<string, unknown>)['name'] === 'sdk-echo',
         );
         expect(sdkServer).toBeDefined();
       } finally {
@@ -326,8 +326,8 @@ describe('SDK MCP Server Integration (E2E)', () => {
         {
           shouldFail: z.boolean().describe('If true, the tool will fail'),
         },
-        async (args) => {
-          if (args.shouldFail) {
+        async (args: Record<string, unknown>) => {
+          if (args['shouldFail'] as boolean) {
             throw new Error('Tool intentionally failed');
           }
           return { content: [{ type: 'text', text: 'Success!' }] };
@@ -390,12 +390,12 @@ describe('SDK MCP Server Integration (E2E)', () => {
           delay: z.number().describe('Delay in milliseconds (max 100)'),
           value: z.string().describe('Value to return'),
         },
-        async (args) => {
+        async (args: Record<string, unknown>) => {
           // Cap delay at 100ms for test performance
-          const actualDelay = Math.min(args.delay, 100);
+          const actualDelay = Math.min(args['delay'] as number, 100);
           await new Promise((resolve) => setTimeout(resolve, actualDelay));
           return {
-            content: [{ type: 'text', text: `Delayed result: ${args.value}` }],
+            content: [{ type: 'text', text: `Delayed result: ${args['value']}` }],
           };
         },
       );

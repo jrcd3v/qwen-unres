@@ -18,7 +18,7 @@ import {
   isSDKResultMessage,
   type SDKMessage,
   type SDKUserMessage,
-} from '@jrcdev/boros-code/sdk';
+} from '@jrcdev/boros-code-sdk';
 import {
   SDKTestHelper,
   extractText,
@@ -335,7 +335,7 @@ describe('Tool Control Parameters (E2E)', () => {
             coreTools: ['read_file', 'write_file'],
             // Allow write_file without confirmation
             allowedTools: ['read_file', 'write_file'],
-            canUseTool: async (_toolName) => {
+            canUseTool: async (_toolName: string) => {
               canUseToolCalled = true;
               return { behavior: 'deny', message: 'Should not be called' };
             },
@@ -427,10 +427,7 @@ describe('Tool Control Parameters (E2E)', () => {
             ...SHARED_TEST_OPTIONS,
             cwd: testDir,
             permissionMode: 'default',
-            // Only allow read_file, list_directory should trigger canUseTool
-            coreTools: ['read_file', 'write_file'],
-            allowedTools: ['read_file'],
-            canUseTool: async (toolName) => {
+            canUseTool: async (toolName: string) => {
               canUseToolCalls.push(toolName);
               return {
                 behavior: 'allow',
@@ -481,7 +478,7 @@ describe('Tool Control Parameters (E2E)', () => {
             permissionMode: 'auto-edit',
             // Allow list_directory in addition to auto-approved edit tools
             allowedTools: ['list_directory'],
-            canUseTool: async (toolName) => {
+            canUseTool: async (toolName: string) => {
               canUseToolCalls.push(toolName);
               return {
                 behavior: 'deny',
@@ -630,7 +627,7 @@ describe('Tool Control Parameters (E2E)', () => {
             excludeTools: ['edit'],
             // Auto-approve write
             allowedTools: ['write_file'],
-            canUseTool: async (toolName) => {
+            canUseTool: async (toolName: string) => {
               canUseToolCalls.push(toolName);
               return {
                 behavior: 'allow',
@@ -782,7 +779,7 @@ describe('Tool Control Parameters (E2E)', () => {
             permissionMode: 'default',
             coreTools: ['read_file', 'write_file'],
             allowedTools: [],
-            canUseTool: async (toolName, input) => {
+            canUseTool: async (toolName: string, input: Record<string, unknown>) => {
               canUseToolCalls.push({ toolName, input });
               return {
                 behavior: 'allow',
@@ -855,7 +852,7 @@ describe('Tool Control Parameters (E2E)', () => {
             cwd: testDir,
             permissionMode: 'default',
             coreTools: ['read_file', 'write_file'],
-            canUseTool: async (toolName) => {
+            canUseTool: async (toolName: string) => {
               if (toolName === 'write_file') {
                 return {
                   behavior: 'deny',
@@ -941,7 +938,7 @@ describe('Tool Control Parameters (E2E)', () => {
             cwd: testDir,
             permissionMode: 'default',
             coreTools: ['read_file', 'write_file'],
-            canUseTool: async (toolName) => {
+            canUseTool: async (toolName: string) => {
               canUseToolCalls.push(toolName);
               return { behavior: 'allow', updatedInput: {} };
             },

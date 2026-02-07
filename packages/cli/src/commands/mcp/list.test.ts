@@ -4,9 +4,12 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+/// <reference types="vitest/globals" />
+
 import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { listMcpServers } from './list.js';
 import { loadSettings } from '../../config/settings.js';
+import type { Mock, SpyInstance } from 'vitest';
 import { isWorkspaceTrusted } from '../../config/trustedFolders.js';
 import { createTransport, ExtensionManager } from '@jrcdev/boros-code-core';
 import { Client } from '@modelcontextprotocol/sdk/client/index.js';
@@ -29,29 +32,29 @@ vi.mock('@jrcdev/boros-code-core', () => ({
 }));
 vi.mock('@modelcontextprotocol/sdk/client/index.js');
 
-const mockedLoadSettings = loadSettings as vi.Mock;
-const mockedIsWorkspaceTrusted = isWorkspaceTrusted as vi.Mock;
-const mockedCreateTransport = createTransport as vi.Mock;
-const MockedExtensionManager = ExtensionManager as vi.Mock;
-const MockedClient = Client as vi.Mock;
+const mockedLoadSettings = loadSettings as Mock;
+const mockedIsWorkspaceTrusted = isWorkspaceTrusted as Mock;
+const mockedCreateTransport = createTransport as Mock;
+const MockedExtensionManager = ExtensionManager as Mock;
+const MockedClient = Client as Mock;
 
 interface MockClient {
-  connect: vi.Mock;
-  ping: vi.Mock;
-  close: vi.Mock;
+  connect: Mock;
+  ping: Mock;
+  close: Mock;
 }
 
 interface MockTransport {
-  close: vi.Mock;
+  close: Mock;
 }
 
 describe('mcp list command', () => {
-  let consoleSpy: vi.SpyInstance;
+  let consoleSpy: SpyInstance;
   let mockClient: MockClient;
   let mockTransport: MockTransport;
   let mockExtensionManager: {
-    refreshCache: vi.Mock;
-    getLoadedExtensions: vi.Mock;
+    refreshCache: Mock;
+    getLoadedExtensions: Mock;
   };
 
   beforeEach(() => {

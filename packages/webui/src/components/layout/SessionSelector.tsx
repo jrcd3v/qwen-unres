@@ -142,16 +142,16 @@ export const SessionSelector: FC<SessionSelectorProps> = ({
                 <div className="session-group flex flex-col gap-[2px]">
                   {group.sessions.map((session) => {
                     const sessionId =
-                      (session.id as string) ||
-                      (session.sessionId as string) ||
+                      (session['id'] as string) ||
+                      (session['sessionId'] as string) ||
                       '';
                     const title =
-                      (session.title as string) ||
-                      (session.name as string) ||
+                      (session['title'] as string) ||
+                      (session['name'] as string) ||
                       'Untitled';
                     const lastUpdated =
-                      (session.lastUpdated as string) ||
-                      (session.startTime as string) ||
+                      (session['lastUpdated'] as string) ||
+                      (session['startTime'] as string) ||
                       '';
                     const isActive = sessionId === currentSessionId;
 

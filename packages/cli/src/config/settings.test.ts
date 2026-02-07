@@ -46,7 +46,6 @@ import {
   afterEach,
   type Mocked,
   type Mock,
-  fail,
 } from 'vitest';
 import * as fs from 'node:fs'; // fs will be mocked separately
 import stripJsonComments from 'strip-json-comments'; // Will be mocked separately
@@ -538,6 +537,9 @@ describe('Settings Loading and Merging', () => {
       // Verify that fs.writeFileSync was called with migrated settings including version
       expect(fs.writeFileSync).toHaveBeenCalled();
       const writeCall = (fs.writeFileSync as Mock).mock.calls[0];
+      if (!writeCall) {
+        throw new Error('writeFileSync was not called');
+      }
       const writtenContent = JSON.parse(writeCall[1] as string);
       expect(writtenContent[SETTINGS_VERSION_KEY]).toBe(SETTINGS_VERSION);
     });
@@ -738,7 +740,7 @@ describe('Settings Loading and Merging', () => {
         (call: unknown[]) => call[0] === USER_SETTINGS_PATH,
       );
       expect(writeCall).toBeDefined();
-      const writtenContent = JSON.parse(writeCall[1] as string);
+      const writtenContent = JSON.parse(writeCall![1] as string);
       expect(writtenContent.$version).toBe(SETTINGS_VERSION);
     });
 
@@ -1619,7 +1621,7 @@ describe('Settings Loading and Merging', () => {
 
       try {
         loadSettings(MOCK_WORKSPACE_DIR);
-        fail('loadSettings should have thrown a FatalConfigError');
+        expect.fail('loadSettings should have thrown a FatalConfigError');
       } catch (e) {
         expect(e).toBeInstanceOf(FatalConfigError);
         const error = e as FatalConfigError;

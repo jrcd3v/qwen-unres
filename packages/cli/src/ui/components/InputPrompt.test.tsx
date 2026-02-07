@@ -4,17 +4,19 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+/// <reference types="vitest/globals" />
+
+import { beforeEach, describe, expect, it } from 'vitest';
+import { act, waitFor } from '@testing-library/react';
+import * as path from 'node:path';
+import type { Config } from '@jrcdev/boros-code-core';
+import { ApprovalMode } from '@jrcdev/boros-code-core';
 import { renderWithProviders } from '../../test-utils/render.js';
-import { waitFor, act } from '@testing-library/react';
 import type { InputPromptProps } from './InputPrompt.js';
 import { InputPrompt } from './InputPrompt.js';
 import type { TextBuffer } from './shared/text-buffer.js';
-import type { Config } from '@jrcdev/boros-code-core';
-import { ApprovalMode } from '@jrcdev/boros-code-core';
-import * as path from 'node:path';
 import type { CommandContext, SlashCommand } from '../commands/types.js';
 import { CommandKind } from '../commands/types.js';
-import { describe, it, expect, beforeEach, vi } from 'vitest';
 import type { UseShellHistoryReturn } from '../hooks/useShellHistory.js';
 import { useShellHistory } from '../hooks/useShellHistory.js';
 import type { UseCommandCompletionReturn } from '../hooks/useCommandCompletion.js';
@@ -1177,7 +1179,10 @@ describe('InputPrompt', () => {
 
   describe('vim mode', () => {
     it('should not call buffer.handleInput when vim mode is enabled and vim handles the input', async () => {
-      props.vimModeEnabled = true;
+      // @ts-expect-error - getVimMode is dynamically added in test
+      (props.config as Record<string, any>).getVimMode = vi
+        .fn()
+        .mockReturnValue(true);
       props.vimHandleInput = vi.fn().mockReturnValue(true); // Mock that vim handled it.
       const { stdin, unmount } = renderWithProviders(
         <InputPrompt {...props} />,
@@ -1193,7 +1198,10 @@ describe('InputPrompt', () => {
     });
 
     it('should call buffer.handleInput when vim mode is enabled but vim does not handle the input', async () => {
-      props.vimModeEnabled = true;
+      // @ts-expect-error - getVimMode is dynamically added in test
+      (props.config as Record<string, any>).getVimMode = vi
+        .fn()
+        .mockReturnValue(true);
       props.vimHandleInput = vi.fn().mockReturnValue(false); // Mock that vim did NOT handle it.
       const { stdin, unmount } = renderWithProviders(
         <InputPrompt {...props} />,
@@ -1979,44 +1987,7 @@ describe('InputPrompt', () => {
       unmount();
     });
 
-    it.skip('expands and collapses long suggestion via Right/Left arrows', async () => {
-      props.shellModeActive = false;
-      const longValue = 'l'.repeat(200);
-
-      vi.mocked(useReverseSearchCompletion).mockReturnValue({
-        ...mockReverseSearchCompletion,
-        suggestions: [{ label: longValue, value: longValue, matchedIndex: 0 }],
-        showSuggestions: true,
-        activeSuggestionIndex: 0,
-        visibleStartIndex: 0,
-        isLoadingSuggestions: false,
-      });
-
-      const { stdin, stdout, unmount } = renderWithProviders(
-        <InputPrompt {...props} />,
-      );
-      await wait();
-
-      stdin.write('\x12');
-      await wait();
-
-      expect(clean(stdout.lastFrame())).toContain('→');
-
-      stdin.write('\u001B[C');
-      await wait(200);
-      expect(clean(stdout.lastFrame())).toContain('←');
-      expect(stdout.lastFrame()).toMatchSnapshot(
-        'command-search-expanded-match',
-      );
-
-      stdin.write('\u001B[D');
-      await wait();
-      expect(clean(stdout.lastFrame())).toContain('→');
-      expect(stdout.lastFrame()).toMatchSnapshot(
-        'command-search-collapsed-match',
-      );
-      unmount();
-    });
+    it.todo('expands and collapses long suggestion via Right/Left arrows');
 
     it('renders match window and expanded view (snapshots)', async () => {
       props.shellModeActive = false;

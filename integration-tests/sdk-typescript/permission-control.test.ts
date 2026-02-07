@@ -22,7 +22,7 @@ import {
   type SDKUserMessage,
   type ToolUseBlock,
   type ContentBlock,
-} from '@jrcdev/boros-code/sdk';
+} from '@jrcdev/boros-code-sdk';
 import {
   SDKTestHelper,
   createSharedTestOptions,
@@ -129,7 +129,7 @@ describe('Permission Control (E2E)', () => {
         options: {
           ...SHARED_TEST_OPTIONS,
           cwd: testDir,
-          canUseTool: async (toolName, input) => {
+          canUseTool: async (toolName: string, input: Record<string, unknown>) => {
             toolCalls.push({ toolName, input });
             return {
               behavior: 'deny',
@@ -171,7 +171,7 @@ describe('Permission Control (E2E)', () => {
           ...SHARED_TEST_OPTIONS,
           permissionMode: 'default',
           cwd: testDir,
-          canUseTool: async (toolName, input) => {
+          canUseTool: async (toolName: string, input: Record<string, unknown>) => {
             callbackInvoked = true;
             return {
               behavior: 'allow',
@@ -188,7 +188,7 @@ describe('Permission Control (E2E)', () => {
             if (
               Array.isArray(message.message.content) &&
               message.message.content.some(
-                (block) => block.type === 'tool_result',
+                (block: unknown) => (block as Record<string, unknown>)['type'] === 'tool_result',
               )
             ) {
               hasToolResult = true;
@@ -244,8 +244,8 @@ describe('Permission Control (E2E)', () => {
           ...SHARED_TEST_OPTIONS,
           permissionMode: 'default',
           cwd: testDir,
-          canUseTool: async (toolName, input, options) => {
-            receivedSuggestions = options?.suggestions;
+          canUseTool: async (toolName: string, input: Record<string, unknown>, options: unknown) => {
+            receivedSuggestions = (options as Record<string, unknown>)?.['suggestions'];
             return {
               behavior: 'allow',
               updatedInput: input,
@@ -275,8 +275,8 @@ describe('Permission Control (E2E)', () => {
           ...SHARED_TEST_OPTIONS,
           permissionMode: 'default',
           cwd: testDir,
-          canUseTool: async (toolName, input, options) => {
-            receivedSignal = options?.signal;
+          canUseTool: async (toolName: string, input: Record<string, unknown>, options: unknown) => {
+            receivedSignal = (options as Record<string, unknown>)?.['signal'] as AbortSignal | undefined;
             return {
               behavior: 'allow',
               updatedInput: input,
@@ -616,7 +616,7 @@ describe('Permission Control (E2E)', () => {
           ...SHARED_TEST_OPTIONS,
           permissionMode: 'default',
           cwd: testDir,
-          canUseTool: async (toolName, input) => {
+          canUseTool: async (toolName: string, input: Record<string, unknown>) => {
             toolCalls.push({ toolName, input });
             return {
               behavior: 'allow',
@@ -734,7 +734,7 @@ describe('Permission Control (E2E)', () => {
               ...SHARED_TEST_OPTIONS,
               permissionMode: 'default',
               cwd: testDir,
-              canUseTool: async (toolName, input) => {
+              canUseTool: async (toolName: string, input: Record<string, unknown>) => {
                 callbackInvoked = true;
                 return {
                   behavior: 'allow',
@@ -827,7 +827,7 @@ describe('Permission Control (E2E)', () => {
               ...SHARED_TEST_OPTIONS,
               permissionMode: 'yolo',
               cwd: testDir,
-              canUseTool: async (toolName, input) => {
+              canUseTool: async (toolName: string, input: Record<string, unknown>) => {
                 callbackInvoked = true;
                 return {
                   behavior: 'allow',
@@ -1037,7 +1037,7 @@ describe('Permission Control (E2E)', () => {
               ...SHARED_TEST_OPTIONS,
               permissionMode: 'plan',
               cwd: testDir,
-              canUseTool: async (toolName, input) => {
+              canUseTool: async (toolName: string, input: Record<string, unknown>) => {
                 callbackInvoked = true;
                 return {
                   behavior: 'allow',
@@ -1157,7 +1157,7 @@ describe('Permission Control (E2E)', () => {
               ...SHARED_TEST_OPTIONS,
               permissionMode: 'auto-edit',
               cwd: testDir,
-              canUseTool: async (toolName, input) => {
+              canUseTool: async (toolName: string, input: Record<string, unknown>) => {
                 callbackInvoked = true;
                 return {
                   behavior: 'allow',
@@ -1238,7 +1238,7 @@ describe('Permission Control (E2E)', () => {
                 canUseTool:
                   mode === 'yolo' || mode === 'auto-edit'
                     ? undefined
-                    : async (toolName, input) => {
+                    : async (toolName: string, input: Record<string, unknown>) => {
                         return {
                           behavior: 'allow',
                           updatedInput: input,

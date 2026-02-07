@@ -37,5 +37,5 @@
     "types": ["node"]
   },
   "include": ["src/**/*.ts"],
-  "exclude": ["node_modules", "dist", "test", ".integration-tests"]
+  "exclude": ["node_modules", "dist", "test", "test/**/*.test.ts", ".integration-tests"]
 }

@@ -43,6 +43,20 @@ export interface ExtendedSystemInfo extends SystemInfo {
 }
 
 /**
+ * Helper function to convert GIT_COMMIT_INFO to a string
+ * Handles both string values (from production build) and object values (from test fallback)
+ */
+export function formatGitCommitInfo(info: unknown): string | undefined {
+  if (typeof info === 'string') {
+    return info !== 'N/A' ? info : undefined;
+  }
+  if (typeof info === 'object' && info !== null) {
+    return JSON.stringify(info);
+  }
+  return undefined;
+}
+
+/**
  * Gets the NPM version, handling cases where npm might not be available.
  * Returns 'unknown' if npm command fails or is not found.
  */
@@ -162,10 +176,7 @@ export async function getExtendedSystemInfo(
       : undefined;
 
   // Get git commit info
-  const gitCommit =
-    GIT_COMMIT_INFO && !['N/A'].includes(GIT_COMMIT_INFO)
-      ? GIT_COMMIT_INFO
-      : undefined;
+  const gitCommit = formatGitCommitInfo(GIT_COMMIT_INFO);
 
   return {
     ...baseInfo,
